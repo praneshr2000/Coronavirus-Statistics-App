@@ -1,9 +1,10 @@
 package com.example.coronavirus_stats_app.DataModels;
 
-public class GlobalData {
+public class PlaceData {
 
     private int FIPSCode;
     private String USCountyName;
+    private String provinceState;
     private String countryName;
     private boolean isUSA;
     private boolean hasProvinceState;
@@ -17,59 +18,71 @@ public class GlobalData {
     private String combinedKey;
     private float incidentRate;
     private float caseFatalityRatio;
+    private int newCases;
+    private int newDeaths;
+    private int newRecovered;
+    private int newActive;
 
+    public PlaceData() {
 
-    public GlobalData() {
     }
 
-    public GlobalData(String countryName,
-                      boolean isUSA,
-                      boolean hasProvinceState,
-                      String lastUpdate,
-                      float latitude,
-                      float longitude,
-                      int confirmed,
-                      int deaths,
-                      int recovered,
-                      int active,
-                      String combinedKey,
-                      float incidentRate,
-                      float caseFatalityRatio) {
-
-        this.countryName = countryName;
-        this.isUSA = isUSA;
-        this.hasProvinceState = hasProvinceState;
-        this.lastUpdate = lastUpdate;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.confirmed = confirmed;
-        this.deaths = deaths;
-        this.recovered = recovered;
-        this.active = active;
-        this.combinedKey = combinedKey;
-        this.incidentRate = incidentRate;
-        this.caseFatalityRatio = caseFatalityRatio;
-    }
-
-    public GlobalData(int FIPSCode,
-                      String USCountyName,
-                      String countryName,
-                      boolean isUSA,
-                      boolean hasProvinceState,
-                      String lastUpdate,
-                      float latitude,
-                      float longitude,
-                      int confirmed,
-                      int deaths,
-                      int recovered,
-                      int active,
-                      String combinedKey,
-                      float incidentRate,
-                      float caseFatalityRatio) {
+    public PlaceData(int FIPSCode,
+                     String USCountyName,
+                     String provinceState,
+                     String countryName,
+                     boolean isUSA,
+                     boolean hasProvinceState,
+                     String lastUpdate,
+                     float latitude,
+                     float longitude,
+                     int confirmed,
+                     int deaths,
+                     String combinedKey,
+                     float incidentRate,
+                     float caseFatalityRatio,
+                     int newCases,
+                     int newDeaths) {
 
         this.FIPSCode = FIPSCode;
         this.USCountyName = USCountyName;
+        this.provinceState = provinceState;
         this.countryName = countryName;
+        this.isUSA = isUSA;
+        this.hasProvinceState = hasProvinceState;
+        this.lastUpdate = lastUpdate;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.confirmed = confirmed;
+        this.deaths = deaths;
+        this.combinedKey = combinedKey;
+        this.incidentRate = incidentRate;
+        this.caseFatalityRatio = caseFatalityRatio;
+        this.newCases = newCases;
+        this.newDeaths = newDeaths;
+    }
+
+    public PlaceData(String countryName,
+                      String provinceState,
+                      boolean isUSA,
+                      boolean hasProvinceState,
+                      String lastUpdate,
+                      float latitude,
+                      float longitude,
+                      int confirmed,
+                      int deaths,
+                      int recovered,
+                      int active,
+                      String combinedKey,
+                      float incidentRate,
+                      float caseFatalityRatio,
+                      int newCases,
+                      int newDeaths,
+                      int newRecovered,
+                      int newActive) {
+
+        this.countryName = countryName;
+        this.provinceState = provinceState;
         this.isUSA = isUSA;
         this.hasProvinceState = hasProvinceState;
         this.lastUpdate = lastUpdate;
@@ -82,6 +95,10 @@ public class GlobalData {
         this.combinedKey = combinedKey;
         this.incidentRate = incidentRate;
         this.caseFatalityRatio = caseFatalityRatio;
+        this.newCases = newCases;
+        this.newDeaths = newDeaths;
+        this.newRecovered = newRecovered;
+        this.newActive = newActive;
     }
 
     public int getFIPSCode() {
@@ -98,6 +115,14 @@ public class GlobalData {
 
     public void setUSCountyName(String USCountyName) {
         this.USCountyName = USCountyName;
+    }
+
+    public String getProvinceState() {
+        return provinceState;
+    }
+
+    public void setProvinceState(String provinceState) {
+        this.provinceState = provinceState;
     }
 
     public String getCountryName() {
@@ -204,11 +229,44 @@ public class GlobalData {
         this.caseFatalityRatio = caseFatalityRatio;
     }
 
+    public int getNewCases() {
+        return newCases;
+    }
+
+    public void setNewCases(int newCases) {
+        this.newCases = newCases;
+    }
+
+    public int getNewDeaths() {
+        return newDeaths;
+    }
+
+    public void setNewDeaths(int newDeaths) {
+        this.newDeaths = newDeaths;
+    }
+
+    public int getNewRecovered() {
+        return newRecovered;
+    }
+
+    public void setNewRecovered(int newRecovered) {
+        this.newRecovered = newRecovered;
+    }
+
+    public int getNewActive() {
+        return newActive;
+    }
+
+    public void setNewActive(int newActive) {
+        this.newActive = newActive;
+    }
+
     @Override
     public String toString() {
-        return "GlobalData{" +
+        return "PlaceData{" +
                 "FIPSCode=" + FIPSCode +
                 ", USCountyName='" + USCountyName + '\'' +
+                ", provinceState='" + provinceState + '\'' +
                 ", countryName='" + countryName + '\'' +
                 ", isUSA=" + isUSA +
                 ", hasProvinceState=" + hasProvinceState +
@@ -222,6 +280,10 @@ public class GlobalData {
                 ", combinedKey='" + combinedKey + '\'' +
                 ", incidentRate=" + incidentRate +
                 ", caseFatalityRatio=" + caseFatalityRatio +
+                ", newCases=" + newCases +
+                ", newDeaths=" + newDeaths +
+                ", newRecovered=" + newRecovered +
+                ", newActive=" + newActive +
                 '}';
     }
 }
