@@ -20,6 +20,7 @@ public class CoronaVirusDataService {
 
     private List<PlaceData> allData = new ArrayList<>();
     private Map<String, List<PlaceData>> countriesWithProvinceMap = new HashMap<>();
+    private Map<String, PlaceData> countriesWithoutProvinceMap = new HashMap<>();
     private Map<String, List<PlaceData>> USStateToCountyMap = new HashMap<>();
 
     @PostConstruct
@@ -55,6 +56,37 @@ public class CoronaVirusDataService {
         readDataFromURLs(previousDayResponse, currentDayResponse);
 
     }
+
+//    @PostConstruct
+//    public void getThreeDigitCodes() throws IOException, InterruptedException {
+//        String dataURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv";
+//
+//        // Build the HTTP client
+//        HttpClient client = HttpClient.newHttpClient();
+//
+//        // Request from previous day's URL for data
+//        HttpRequest previousDayRequest = HttpRequest.newBuilder()
+//                .uri(URI.create(dataURL))
+//                .build();
+//
+//        // Store the previous day's HTTP response
+//        HttpResponse<String> previousDayResponse =
+//                client.send(previousDayRequest, HttpResponse.BodyHandlers.ofString());
+//
+//        Reader dataIn = new StringReader(previousDayResponse.body());
+//        Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(dataIn);
+//        for (CSVRecord record: records) {
+//            String countryCode = record.get("iso3");
+//            String countryName = record.get("Country_Region");
+//            if (!countryCode.isEmpty()) {
+//                if (!codeToCountryMap.containsKey(countryCode) &&
+//                        (countryName.equals("US") || countriesWithProvinceMap.containsKey(countryName))) {
+//                    codeToCountryMap.put(countryCode, countryName);
+//                }
+//            }
+//        }
+//        System.out.println(codeToCountryMap);
+//    }
 
     public void readDataFromURLs(HttpResponse<String> previousDayResponse,
                                  HttpResponse<String> currentDayResponse) throws IOException {
@@ -112,8 +144,9 @@ public class CoronaVirusDataService {
                 } else {
                     countriesWithProvinceMap.get(country).add(data);
                 }
+            } else {
+                countriesWithoutProvinceMap.put(cRecord.get("Country_Region"), data);
             }
-
             allData.add(data);
         }
 
@@ -129,5 +162,9 @@ public class CoronaVirusDataService {
 
     public Map<String, List<PlaceData>> getUSStateToCountyMap() {
         return USStateToCountyMap;
+    }
+
+    public Map<String, PlaceData> getCountriesWithoutProvinceMap() {
+        return countriesWithoutProvinceMap;
     }
 }
