@@ -18,10 +18,10 @@ import java.util.*;
 @Service
 public class CoronaVirusDataService {
 
-    private List<PlaceData> allData = new ArrayList<>();
-    private Map<String, List<PlaceData>> countriesWithProvinceMap = new HashMap<>();
-    private Map<String, PlaceData> countriesWithoutProvinceMap = new HashMap<>();
-    private Map<String, List<PlaceData>> USStateToCountyMap = new HashMap<>();
+    private final List<PlaceData> allData = new ArrayList<>();
+    private final Map<String, List<PlaceData>> countriesWithProvinceMap = new HashMap<>();
+    private final Map<String, PlaceData> countriesWithoutProvinceMap = new HashMap<>();
+    private final Map<String, List<PlaceData>> USStateToCountyMap = new HashMap<>();
 
     @PostConstruct
     public void getDataFromURL() throws IOException, InterruptedException {
@@ -60,12 +60,15 @@ public class CoronaVirusDataService {
     public void readDataFromURLs(HttpResponse<String> previousDayResponse,
                                  HttpResponse<String> currentDayResponse) throws IOException {
 
+        // Create StringReaders for the response body of previous day and current day
         Reader prevDayIn = new StringReader(previousDayResponse.body());
         Reader currDayIn = new StringReader(currentDayResponse.body());
 
+        // Create Iterable CSVRecord with excluding the Header line
         Iterable<CSVRecord> prevRecords = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(prevDayIn);
         Iterable<CSVRecord> currRecords = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(currDayIn);
 
+        // Create an iterator
         Iterator<CSVRecord> prevIterator = prevRecords.iterator();
         Iterator<CSVRecord> currIterator = currRecords.iterator();
         while(prevIterator.hasNext() && currIterator.hasNext()){
@@ -73,7 +76,10 @@ public class CoronaVirusDataService {
             CSVRecord cRecord = currIterator.next();
 
             // If FIPS is not present, we set it to -1
-            // If Latitude, Longitude, incident rate, case fertility ratio is not given, we set it to positive infinity
+            // If Latitude is not given, we set it to positive infinity
+            // If Longitude is not given, we set it to positive infinity
+            // If Case Fertility Ratio is not given, we set it to positive infinity
+            // If Incident rate is not given, we set it to positive infinity
             PlaceData data = new PlaceData((cRecord.get("FIPS").isEmpty()) ? -1 : Integer.parseInt(cRecord.get("FIPS")),
                     cRecord.get("Admin2"),
                     cRecord.get("Province_State"),
@@ -92,9 +98,11 @@ public class CoronaVirusDataService {
                     Integer.parseInt(cRecord.get("Deaths")) - Integer.parseInt(pRecord.get("Deaths")));
 
 
+            // Check if the country is US in the current row
             if (pRecord.get("Country_Region").equals("US") && cRecord.get("Country_Region").equals("US")) {
                 String state = pRecord.get("Province_State");
 
+                // Add each state as key, and add counties to the value list
                 if (!USStateToCountyMap.containsKey(state)) {
                     List<PlaceData> list = new ArrayList<>();
                     list.add(data);
@@ -103,9 +111,11 @@ public class CoronaVirusDataService {
                     USStateToCountyMap.get(state).add(data);
                 }
 
+            // Check if the country has province or state data
             } else if (!pRecord.get("Province_State").equals("") && !cRecord.get("Province_State").equals("")){
                 String country = pRecord.get("Country_Region");
 
+                // Add country as a key and add province/state data in the value list
                 if (!countriesWithProvinceMap.containsKey(country)) {
                     List<PlaceData> list = new ArrayList<>();
                     list.add(data);
@@ -114,13 +124,21 @@ public class CoronaVirusDataService {
                     countriesWithProvinceMap.get(country).add(data);
                 }
             } else {
+                // If the country is not US and does not have any province or state data
+                // add the country name as the key and its PlaceData as object
                 countriesWithoutProvinceMap.put(cRecord.get("Country_Region"), data);
             }
+            // All rows in the data are added to this list
             allData.add(data);
         }
 
     }
 
+    /*
+    *
+    * Getter methods below
+    *
+    * */
     public List<PlaceData> getAllData() {
         return allData;
     }
