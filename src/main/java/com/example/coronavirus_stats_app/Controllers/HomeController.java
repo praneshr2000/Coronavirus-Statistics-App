@@ -1,28 +1,26 @@
 package com.example.coronavirus_stats_app.Controllers;
 
-import com.example.coronavirus_stats_app.DataModels.PlaceData;
-import com.example.coronavirus_stats_app.Services.CoronaVirusDataService;
+import com.example.coronavirus_stats_app.DataModels.HomepageData;
+import com.example.coronavirus_stats_app.Services.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(path="api/v1/home")
 public class HomeController {
 
-    private final CoronaVirusDataService coronaVirusDataService;
+    private final HomeService homeService;
 
     @Autowired
-    public HomeController(CoronaVirusDataService coronaVirusDataService) {
-        this.coronaVirusDataService = coronaVirusDataService;
+    public HomeController(HomeService homeService) {
+        this.homeService = homeService;
     }
 
     @GetMapping
-    public List<PlaceData> getAllData() {
-        return coronaVirusDataService.getAllData();
+    public HomepageData getAllData() {
+        return homeService.getAllData();
     }
 
 

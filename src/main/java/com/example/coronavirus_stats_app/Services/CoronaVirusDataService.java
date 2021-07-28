@@ -28,8 +28,8 @@ public class CoronaVirusDataService {
 
         // URls
         // TODO: Update the URLs according to the system's time
-        String previousDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/07-25-2021.csv";
-        String currentDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/07-26-2021.csv";
+        String previousDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/07-26-2021.csv";
+        String currentDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/07-27-2021.csv";
 
         // Build the HTTP client
         HttpClient client = HttpClient.newHttpClient();
