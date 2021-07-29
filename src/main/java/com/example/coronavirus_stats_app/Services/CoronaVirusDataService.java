@@ -41,7 +41,7 @@ public class CoronaVirusDataService {
         String oldDate = dateFormat.format(Date.from(Instant.now().minus(Duration.ofHours(48))));
 
         // -------------------TODO: TEST PRINT ONLY, REMOVE LATER--------------------
-        SimpleDateFormat testLogTime = new SimpleDateFormat( "MM-dd-yyyy KK:mm:ss Z");
+        SimpleDateFormat testLogTime = new SimpleDateFormat( "MM-dd-yyyy HH:mm:ss Z");
         testLogTime.setTimeZone(TimeZone.getTimeZone("UTC"));
         System.out.println();
         System.out.println("The getAllData() method executed at: " + testLogTime.format(new Date()));
