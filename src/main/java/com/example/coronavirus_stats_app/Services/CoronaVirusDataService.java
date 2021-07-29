@@ -3,6 +3,7 @@ package com.example.coronavirus_stats_app.Services;
 import com.example.coronavirus_stats_app.DataModels.PlaceData;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 
 @Service
@@ -24,12 +28,31 @@ public class CoronaVirusDataService {
     private final Map<String, List<PlaceData>> USStateToCountyMap = new HashMap<>();
 
     @PostConstruct
+    @Scheduled(cron = "45 7 * * *", zone = "UTC")
     public void getDataFromURL() throws IOException, InterruptedException {
+        // The above @Scheduled cron executes this method everyday at 7:45am UTC
+
+        // Date Format for URL
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "MM-dd-yyyy" );
+        // Set UTC time zone
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        // Get the dates
+        String currentDate = dateFormat.format(Date.from(Instant.now().minus(Duration.ofHours(24))));
+        String oldDate = dateFormat.format(Date.from(Instant.now().minus(Duration.ofHours(48))));
+
+        // -------------------TODO: TEST PRINT ONLY, REMOVE LATER--------------------
+        SimpleDateFormat testLogTime = new SimpleDateFormat( "MM-dd-yyyy KK:mm:ss Z");
+        testLogTime.setTimeZone(TimeZone.getTimeZone("UTC"));
+        System.out.println();
+        System.out.println("The getAllData() method executed at: " + testLogTime.format(new Date()));
+        System.out.println();
+        // -------------------TODO: TEST PRINT ONLY, REMOVE LATER---------------------
 
         // URls
-        // TODO: Update the URLs according to the system's time
-        String previousDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/07-26-2021.csv";
-        String currentDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/07-27-2021.csv";
+        String previousDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/" +
+                                "csse_covid_19_data/csse_covid_19_daily_reports/" + oldDate + ".csv";
+        String currentDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/" +
+                                "csse_covid_19_data/csse_covid_19_daily_reports/" + currentDate + ".csv";
 
         // Build the HTTP client
         HttpClient client = HttpClient.newHttpClient();

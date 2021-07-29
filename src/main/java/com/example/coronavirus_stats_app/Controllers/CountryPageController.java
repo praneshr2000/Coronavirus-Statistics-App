@@ -17,6 +17,9 @@ import java.util.Map;
 @RequestMapping(path="api/v1/country")
 public class CountryPageController {
 
+    /****
+    // TODO: For each country page, get historical data from csse_covid_timeseries and plot graphs
+    ****/
     private final CoronaVirusDataService coronaVirusDataService;
 
     @Autowired
