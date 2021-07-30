@@ -3,6 +3,7 @@ package com.example.coronavirus_stats_app.Services;
 import com.example.coronavirus_stats_app.DataModels.PlaceData;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.time.Instant;
 import java.util.*;
 
 @Service
+@EnableScheduling
 public class CoronaVirusDataService {
 
     private final List<PlaceData> allData = new ArrayList<>();
@@ -28,7 +30,7 @@ public class CoronaVirusDataService {
     private final Map<String, List<PlaceData>> USStateToCountyMap = new HashMap<>();
 
     @PostConstruct
-    @Scheduled(cron = "45 7 * * *", zone = "UTC")
+    @Scheduled(cron = "0 45 7 * * *", zone = "UTC")
     public void getDataFromURL() throws IOException, InterruptedException {
         // The above @Scheduled cron executes this method everyday at 7:45am UTC
 
