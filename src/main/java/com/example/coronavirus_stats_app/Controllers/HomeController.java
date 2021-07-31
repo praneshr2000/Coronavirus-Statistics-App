@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path="api/v1/home")
 public class HomeController {
 
+    // Inject HomeService instance
     private final HomeService homeService;
-
     @Autowired
     public HomeController(HomeService homeService) {
         this.homeService = homeService;
     }
 
+    // Get all the data for homepage
     @GetMapping
     public HomepageData getAllData() {
         return homeService.getAllData();
