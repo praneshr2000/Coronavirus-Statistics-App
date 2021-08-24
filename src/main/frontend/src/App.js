@@ -2,6 +2,7 @@ import './App.css';
 import axios from 'axios'
 import {useState} from 'react'
 import {useEffect} from 'react'
+import GlobalCountryData from './GlobalCountryData';
 
 function App() {
 
@@ -84,8 +85,17 @@ function App() {
 
         {
           // Filter out the map
-          filteredSearchArray.map(country => {
-            return <h4>{country.country}</h4>
+          filteredSearchArray.map(c => {
+            return(
+              <GlobalCountryData
+               key={c.country}
+               country={c.country}
+               totalCountryConfirmedCases={c.totalCountryConfirmedCases}
+               totalCountryConfirmedDeaths={c.totalCountryConfirmedDeaths} 
+               totalCountryNewConfirmedCases={c.totalCountryNewConfirmedCases} 
+               totalCountryNewConfirmedDeaths={c.totalCountryNewConfirmedDeaths}
+              />
+            )
           })
         }
       </div>
