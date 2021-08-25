@@ -28,6 +28,7 @@ public class CoronaVirusDataService {
     private final Map<String, List<PlaceData>> countriesWithProvinceMap = new HashMap<>();
     private final Map<String, PlaceData> countriesWithoutProvinceMap = new HashMap<>();
     private final Map<String, List<PlaceData>> USStateToCountyMap = new HashMap<>();
+    private final Map<String, List<String>> countryToISO2Code = new HashMap<>();
 
     @PostConstruct
     @Scheduled(cron = "0 45 7 ? * *", zone = "UTC")
@@ -77,9 +78,59 @@ public class CoronaVirusDataService {
         HttpResponse<String> currentDayResponse =
                 client.send(currentDayRequest, HttpResponse.BodyHandlers.ofString());
 
-
+        getISOCodesAndFlagURL();
         readDataFromURLs(previousDayResponse, currentDayResponse);
 
+    }
+
+    public void getISOCodesAndFlagURL() throws IOException, InterruptedException {
+
+        // Initialize with some exceptions (Refer to README UIUD lookup table logic)
+        // FOR CRUISE SHIPS INITIALIZE TO EMPTY STRING
+        countryToISO2Code.put("Diamond Princess", new ArrayList<>(Arrays.asList("", "")));
+        countryToISO2Code.put("MS Zaandam", new ArrayList<>(Arrays.asList("", "")));
+
+        countryToISO2Code.put("Denmark", new ArrayList<>(Arrays.asList("DK", "https://flagcdn.com/16x12/dk.png")));
+        countryToISO2Code.put("France", new ArrayList<>(Arrays.asList("FR", "https://flagcdn.com/16x12/fr.png")));
+        countryToISO2Code.put("Netherlands", new ArrayList<>(Arrays.asList("NL", "https://flagcdn.com/16x12/nl.png")));
+        countryToISO2Code.put("United Kingdom", new ArrayList<>(Arrays.asList("GB", "https://flagcdn.com/16x12/gb.png")));
+        countryToISO2Code.put("Australia", new ArrayList<>(Arrays.asList("AU", "https://flagcdn.com/16x12/au.png")));
+        countryToISO2Code.put("Canada", new ArrayList<>(Arrays.asList("CA", "https://flagcdn.com/16x12/ca.png")));
+        countryToISO2Code.put("China", new ArrayList<>(Arrays.asList("CN", "https://flagcdn.com/16x12/cn.png")));
+        countryToISO2Code.put("Germany", new ArrayList<>(Arrays.asList("DE", "https://flagcdn.com/16x12/de.png")));
+        countryToISO2Code.put("Italy", new ArrayList<>(Arrays.asList("IT", "https://flagcdn.com/16x12/it.png")));
+        countryToISO2Code.put("US", new ArrayList<>(Arrays.asList("US", "https://flagcdn.com/16x12/us.png")));
+
+        String UIDLookUpTableLink = "https://raw.githubusercontent.com/CSSEGISandData/" +
+                "COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv";
+
+        // Build the HTTP client
+        HttpClient client = HttpClient.newHttpClient();
+
+        // Request from UID URL for data
+        HttpRequest UIDRequest = HttpRequest.newBuilder()
+                .uri(URI.create(UIDLookUpTableLink))
+                .build();
+
+        // Store the UID HTTP response
+        HttpResponse<String> UIDResponse =
+                client.send(UIDRequest, HttpResponse.BodyHandlers.ofString());
+
+        // Create StringReader
+        Reader UIDIn = new StringReader(UIDResponse.body());
+
+        // Create Iterable CSVRecord with excluding the Header line
+        Iterable<CSVRecord> UIDRecords = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(UIDIn);
+
+        // Create an iterator
+        for (CSVRecord uRecord : UIDRecords) {
+            String country = uRecord.get(7);
+            String iso2 = uRecord.get(1);
+            if (!countryToISO2Code.containsKey(country)) {
+                String flagURL = "https://flagcdn.com/16x12/" + iso2.toLowerCase() + ".png";
+                countryToISO2Code.put(country, new ArrayList<>(Arrays.asList(iso2, flagURL)));
+            }
+        }
     }
 
     public void readDataFromURLs(HttpResponse<String> previousDayResponse,
@@ -120,7 +171,9 @@ public class CoronaVirusDataService {
                     cRecord.get("Incident_Rate").isEmpty() ? Float.POSITIVE_INFINITY : Float.parseFloat(cRecord.get("Incident_Rate")),
                     cRecord.get("Case_Fatality_Ratio").isEmpty() ? Float.POSITIVE_INFINITY : Float.parseFloat(cRecord.get("Case_Fatality_Ratio")),
                     Integer.parseInt(cRecord.get("Confirmed")) - Integer.parseInt(pRecord.get("Confirmed")),
-                    Integer.parseInt(cRecord.get("Deaths")) - Integer.parseInt(pRecord.get("Deaths")));
+                    Integer.parseInt(cRecord.get("Deaths")) - Integer.parseInt(pRecord.get("Deaths")),
+                    countryToISO2Code.get(cRecord.get("Country_Region")).get(0),
+                    countryToISO2Code.get(cRecord.get("Country_Region")).get(1));
 
 
             // Check if the country is US in the current row
@@ -178,5 +231,9 @@ public class CoronaVirusDataService {
 
     public Map<String, PlaceData> getCountriesWithoutProvinceMap() {
         return countriesWithoutProvinceMap;
+    }
+
+    public Map<String, List<String>> getCountryToISO2Code() {
+        return countryToISO2Code;
     }
 }

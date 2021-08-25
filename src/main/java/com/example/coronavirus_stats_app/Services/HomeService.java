@@ -29,8 +29,11 @@ public class HomeService {
         // Countries with no province data
         for(String country: coronaVirusDataService.getCountriesWithoutProvinceMap().keySet()) {
             PlaceData placeData = coronaVirusDataService.getCountriesWithoutProvinceMap().get(country);
+
             HomepageData.CountryData countryData = new HomepageData.CountryData(
                     placeData.getCountryName(),
+                    coronaVirusDataService.getCountryToISO2Code().get(placeData.getCountryName()).get(0),
+                    coronaVirusDataService.getCountryToISO2Code().get(placeData.getCountryName()).get(1),
                     placeData.getConfirmed(),
                     placeData.getDeaths(),
                     placeData.getNewCases(),
@@ -59,6 +62,8 @@ public class HomeService {
 
             HomepageData.CountryData countryData = new HomepageData.CountryData(
                     country,
+                    coronaVirusDataService.getCountryToISO2Code().get(country).get(0),
+                    coronaVirusDataService.getCountryToISO2Code().get(country).get(1),
                     countryConfirmedCases,
                     countryDeaths,
                     countryNewCases,
@@ -88,6 +93,8 @@ public class HomeService {
 
             HomepageData.CountryData countryData = new HomepageData.CountryData(
                     "US",
+                    coronaVirusDataService.getCountryToISO2Code().get("US").get(0),
+                    coronaVirusDataService.getCountryToISO2Code().get("US").get(1),
                     stateConfirmedCases,
                     stateDeaths,
                     stateNewCases,

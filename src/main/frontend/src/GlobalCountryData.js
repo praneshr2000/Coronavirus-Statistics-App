@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
+import './GlobalCountryData.css';
 
-const GlobalCountryData = ({country,
+const GlobalCountryData = ({country,     
+     flagURL,
      totalCountryConfirmedCases, 
      totalCountryConfirmedDeaths,
      totalCountryNewConfirmedCases,
@@ -11,6 +13,7 @@ const GlobalCountryData = ({country,
             <div className="countryRow">
                 <div className="country">
                     <h1 className="countryName">{country}</h1>
+                    <img src={flagURL} alt="" />
                 </div>
                 <div className="countryData">
                     <p className="totalCountryConfirmedCases">

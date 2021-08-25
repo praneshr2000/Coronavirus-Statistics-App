@@ -22,6 +22,8 @@ public class PlaceData {
     private int newDeaths;
     private int newRecovered;
     private int newActive;
+    private String iso2;
+    private String flagURL;
 
     public PlaceData() {
 
@@ -42,7 +44,9 @@ public class PlaceData {
                      float incidentRate,
                      float caseFatalityRatio,
                      int newCases,
-                     int newDeaths) {
+                     int newDeaths,
+                     String iso2,
+                     String flagURL) {
 
         this.FIPSCode = FIPSCode;
         this.USCountyName = USCountyName;
@@ -60,6 +64,8 @@ public class PlaceData {
         this.caseFatalityRatio = caseFatalityRatio;
         this.newCases = newCases;
         this.newDeaths = newDeaths;
+        this.iso2 = iso2;
+        this.flagURL = flagURL;
     }
 
     public PlaceData(String countryName,
@@ -261,6 +267,22 @@ public class PlaceData {
         this.newActive = newActive;
     }
 
+    public String getIso2() {
+        return iso2;
+    }
+
+    public void setIso2(String iso2) {
+        this.iso2 = iso2;
+    }
+
+    public String getFlagURL() {
+        return flagURL;
+    }
+
+    public void setFlagURL(String flagURL) {
+        this.flagURL = flagURL;
+    }
+
     @Override
     public String toString() {
         return "PlaceData{" +
@@ -284,6 +306,8 @@ public class PlaceData {
                 ", newDeaths=" + newDeaths +
                 ", newRecovered=" + newRecovered +
                 ", newActive=" + newActive +
+                ", iso2='" + iso2 + '\'' +
+                ", flagURL='" + flagURL + '\'' +
                 '}';
     }
 }

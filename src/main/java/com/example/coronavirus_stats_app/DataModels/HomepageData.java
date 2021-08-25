@@ -66,18 +66,24 @@ public class HomepageData {
     // Inner class
     public static class CountryData implements Comparable<CountryData> {
         private String country;
+        private String iso2;
+        private String flagURL;
         private int totalCountryConfirmedCases;
         private int totalCountryConfirmedDeaths;
         private int totalCountryNewConfirmedCases;
         private int totalCountryNewConfirmedDeaths;
 
         public CountryData(String country,
+                            String iso2,
+                            String flagURL,
                             int totalCountryConfirmedCases,
                             int totalCountryConfirmedDeaths,
                             int totalCountryNewConfirmedCases,
                             int totalCountryNewConfirmedDeaths) {
 
             this.country = country;
+            this.iso2 = iso2;
+            this.flagURL = flagURL;
             this.totalCountryConfirmedCases = totalCountryConfirmedCases;
             this.totalCountryConfirmedDeaths = totalCountryConfirmedDeaths;
             this.totalCountryNewConfirmedCases = totalCountryNewConfirmedCases;
@@ -122,6 +128,22 @@ public class HomepageData {
 
         public void setTotalCountryNewConfirmedDeaths(int totalCountryNewConfirmedDeaths) {
             this.totalCountryNewConfirmedDeaths = totalCountryNewConfirmedDeaths;
+        }
+
+        public String getIso2() {
+            return iso2;
+        }
+
+        public void setIso2(String iso2) {
+            this.iso2 = iso2;
+        }
+
+        public String getFlagURL() {
+            return flagURL;
+        }
+
+        public void setFlagURL(String flagURL) {
+            this.flagURL = flagURL;
         }
 
         @Override

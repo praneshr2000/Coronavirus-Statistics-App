@@ -13,6 +13,7 @@ function App() {
     countryDataList: [
       {
         country: '',
+        flagURL: '',
         totalCountryConfirmedCases: 0,
         totalCountryConfirmedDeaths: 0,
         totalCountryNewConfirmedCases: 0,
@@ -33,7 +34,7 @@ function App() {
     .then(result => {
       setGlobalData(result.data)
     })
-    .catch(error => console.log('lololol'));
+    .catch(error => console.log(error));
   }, []);
 
   // When the value in the search box is changed,
@@ -90,6 +91,7 @@ function App() {
               <GlobalCountryData
                key={c.country}
                country={c.country}
+               flagURL={c.flagURL}
                totalCountryConfirmedCases={c.totalCountryConfirmedCases}
                totalCountryConfirmedDeaths={c.totalCountryConfirmedDeaths} 
                totalCountryNewConfirmedCases={c.totalCountryNewConfirmedCases} 
