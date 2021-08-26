@@ -37,7 +37,8 @@ public class HomeService {
                     placeData.getConfirmed(),
                     placeData.getDeaths(),
                     placeData.getNewCases(),
-                    placeData.getNewDeaths()
+                    placeData.getNewDeaths(),
+                    false
             );
             countryDataSet.add(countryData);
             globalConfirmedCases += placeData.getConfirmed();
@@ -67,7 +68,8 @@ public class HomeService {
                     countryConfirmedCases,
                     countryDeaths,
                     countryNewCases,
-                    countryNewDeaths
+                    countryNewDeaths,
+                    true
             );
             countryDataSet.add(countryData);
 
@@ -98,7 +100,8 @@ public class HomeService {
                     stateConfirmedCases,
                     stateDeaths,
                     stateNewCases,
-                    stateNewDeaths
+                    stateNewDeaths,
+                    true
             );
             countryDataSet.add(countryData);
 

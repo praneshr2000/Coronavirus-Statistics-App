@@ -72,6 +72,7 @@ public class HomepageData {
         private int totalCountryConfirmedDeaths;
         private int totalCountryNewConfirmedCases;
         private int totalCountryNewConfirmedDeaths;
+        private boolean hasProvinceStateData;
 
         public CountryData(String country,
                             String iso2,
@@ -79,7 +80,8 @@ public class HomepageData {
                             int totalCountryConfirmedCases,
                             int totalCountryConfirmedDeaths,
                             int totalCountryNewConfirmedCases,
-                            int totalCountryNewConfirmedDeaths) {
+                            int totalCountryNewConfirmedDeaths,
+                            boolean hasProvinceStateData) {
 
             this.country = country;
             this.iso2 = iso2;
@@ -88,6 +90,7 @@ public class HomepageData {
             this.totalCountryConfirmedDeaths = totalCountryConfirmedDeaths;
             this.totalCountryNewConfirmedCases = totalCountryNewConfirmedCases;
             this.totalCountryNewConfirmedDeaths = totalCountryNewConfirmedDeaths;
+            this.hasProvinceStateData = hasProvinceStateData;
         }
 
         public String getCountry() {
@@ -144,6 +147,14 @@ public class HomepageData {
 
         public void setFlagURL(String flagURL) {
             this.flagURL = flagURL;
+        }
+
+        public boolean isHasProvinceStateData() {
+            return hasProvinceStateData;
+        }
+
+        public void setHasProvinceStateData(boolean hasProvinceStateData) {
+            this.hasProvinceStateData = hasProvinceStateData;
         }
 
         @Override

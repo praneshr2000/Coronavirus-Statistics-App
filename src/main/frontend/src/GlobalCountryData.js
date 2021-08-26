@@ -6,14 +6,26 @@ const GlobalCountryData = ({country,
      totalCountryConfirmedCases, 
      totalCountryConfirmedDeaths,
      totalCountryNewConfirmedCases,
-     totalCountryNewConfirmedDeaths}) => {
-
+     totalCountryNewConfirmedDeaths,
+     hasProvinceStateData}) => {
+    
+    var countryPageURL = "";
+    const URLCountry = country.replace(/ /g, "%20")
+    if (hasProvinceStateData) {
+        if (country === "US") {
+            countryPageURL = "http://localhost:8080/api/v1/country/US";
+        } else {
+            countryPageURL = `http://localhost:8080/api/v1/country/province_state/${URLCountry}`;
+        }
+    } else {
+        countryPageURL = `http://localhost:8080/api/v1/country/${URLCountry}`;
+    }
     return (
         <div className="countryContainer">
-            <div className="countryRow">
+            <a className="countryRow" href={countryPageURL}>
                 <div className="country">
-                    <h1 className="countryName">{country}</h1>
                     <img src={flagURL} alt="" />
+                    <h1 className="countryName">{country}</h1>
                 </div>
                 <div className="countryData">
                     <p className="totalCountryConfirmedCases">
@@ -29,7 +41,7 @@ const GlobalCountryData = ({country,
                         {totalCountryNewConfirmedDeaths.toLocaleString()}
                     </p>
                 </div>
-            </div>
+            </a>
         </div>
     )
 }

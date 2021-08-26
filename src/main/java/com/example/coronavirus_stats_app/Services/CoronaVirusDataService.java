@@ -90,16 +90,16 @@ public class CoronaVirusDataService {
         countryToISO2Code.put("Diamond Princess", new ArrayList<>(Arrays.asList("", "")));
         countryToISO2Code.put("MS Zaandam", new ArrayList<>(Arrays.asList("", "")));
 
-        countryToISO2Code.put("Denmark", new ArrayList<>(Arrays.asList("DK", "https://flagcdn.com/16x12/dk.png")));
-        countryToISO2Code.put("France", new ArrayList<>(Arrays.asList("FR", "https://flagcdn.com/16x12/fr.png")));
-        countryToISO2Code.put("Netherlands", new ArrayList<>(Arrays.asList("NL", "https://flagcdn.com/16x12/nl.png")));
-        countryToISO2Code.put("United Kingdom", new ArrayList<>(Arrays.asList("GB", "https://flagcdn.com/16x12/gb.png")));
-        countryToISO2Code.put("Australia", new ArrayList<>(Arrays.asList("AU", "https://flagcdn.com/16x12/au.png")));
-        countryToISO2Code.put("Canada", new ArrayList<>(Arrays.asList("CA", "https://flagcdn.com/16x12/ca.png")));
-        countryToISO2Code.put("China", new ArrayList<>(Arrays.asList("CN", "https://flagcdn.com/16x12/cn.png")));
-        countryToISO2Code.put("Germany", new ArrayList<>(Arrays.asList("DE", "https://flagcdn.com/16x12/de.png")));
-        countryToISO2Code.put("Italy", new ArrayList<>(Arrays.asList("IT", "https://flagcdn.com/16x12/it.png")));
-        countryToISO2Code.put("US", new ArrayList<>(Arrays.asList("US", "https://flagcdn.com/16x12/us.png")));
+        countryToISO2Code.put("Denmark", new ArrayList<>(Arrays.asList("DK", "https://flagcdn.com/w320/dk.png")));
+        countryToISO2Code.put("France", new ArrayList<>(Arrays.asList("FR", "https://flagcdn.com/w320/fr.png")));
+        countryToISO2Code.put("Netherlands", new ArrayList<>(Arrays.asList("NL", "https://flagcdn.com/w320/nl.png")));
+        countryToISO2Code.put("United Kingdom", new ArrayList<>(Arrays.asList("GB", "https://flagcdn.com/w320/gb.png")));
+        countryToISO2Code.put("Australia", new ArrayList<>(Arrays.asList("AU", "https://flagcdn.com/w320/au.png")));
+        countryToISO2Code.put("Canada", new ArrayList<>(Arrays.asList("CA", "https://flagcdn.com/w320/ca.png")));
+        countryToISO2Code.put("China", new ArrayList<>(Arrays.asList("CN", "https://flagcdn.com/w320/cn.png")));
+        countryToISO2Code.put("Germany", new ArrayList<>(Arrays.asList("DE", "https://flagcdn.com/w320/de.png")));
+        countryToISO2Code.put("Italy", new ArrayList<>(Arrays.asList("IT", "https://flagcdn.com/w320/it.png")));
+        countryToISO2Code.put("US", new ArrayList<>(Arrays.asList("US", "https://flagcdn.com/w320/us.png")));
 
         String UIDLookUpTableLink = "https://raw.githubusercontent.com/CSSEGISandData/" +
                 "COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv";
@@ -127,7 +127,7 @@ public class CoronaVirusDataService {
             String country = uRecord.get(7);
             String iso2 = uRecord.get(1);
             if (!countryToISO2Code.containsKey(country)) {
-                String flagURL = "https://flagcdn.com/16x12/" + iso2.toLowerCase() + ".png";
+                String flagURL = "https://flagcdn.com/w320/" + iso2.toLowerCase() + ".png";
                 countryToISO2Code.put(country, new ArrayList<>(Arrays.asList(iso2, flagURL)));
             }
         }

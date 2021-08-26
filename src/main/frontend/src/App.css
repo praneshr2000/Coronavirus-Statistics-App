@@ -1,27 +1,103 @@
-/* .App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding-right: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #1a1a1c;
+  color: #fff;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 64px;
+  color: #fff;
+}
+
+.globalDataPage {
+  float: center;
+  text-align: center;
+}
+
+.globalDataPageHeader {
+  font-size: 65px;
+  padding-bottom: 35px;
+}
+
+.totalStats h2 {
+  float: center;
+  text-align: center;
+  display: inline-flex;
+  padding: 25px;
+}
+
+.newStats h2 {
+  float: center;
+  text-align: center;
+  display: inline-flex;
+  padding: 25px;
+  padding-bottom: 80px;
+}
+
+.countrySearch {
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.countrySearchText {
+  margin-bottom: 32px;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.countrySearchInput {
+  padding-left: 16px;
+  width: 300px;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  background-image: linear-gradient(-225deg, #ac32e4, #7918f2, #4801ff);
+  color: #e2e2e2;
+}
+
+.countrySearchInput::placeholder {
+  color: #e2e2e2;
+}
+
+.tableHeaderRow {
+  display: flex;
+  justify-content: center;
+}
+
+.tableHeaderRow p {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  border-bottom: 10px solid #d7d7d7;
+  padding-bottom: 20px;
+}
+
+.countryNameTable {
+  width: 280px;
+}
+
+.totalCasesTable {
+  width: 210px;
+}
+
+.totalDeathsTable {
+  width: 250px;
+}
+
+.newCasesTable {
+  width: 200px;
+}
+
+.newDeathsTable {
+  width: 200px;
+}
