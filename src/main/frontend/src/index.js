@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import PageRouter from './Components/PageRouter'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <PageRouter />
   </React.StrictMode>,
   document.getElementById('root')
 );

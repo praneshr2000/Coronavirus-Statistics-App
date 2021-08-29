@@ -13,16 +13,17 @@ const GlobalCountryData = ({country,
     const URLCountry = country.replace(/ /g, "%20")
     if (hasProvinceStateData) {
         if (country === "US") {
-            countryPageURL = "http://localhost:8080/api/v1/country/US";
+            countryPageURL = "../countries/US";
         } else {
-            countryPageURL = `http://localhost:8080/api/v1/country/province_state/${URLCountry}`;
+            countryPageURL = `../countries/province_state/${URLCountry}`;
         }
     } else {
-        countryPageURL = `http://localhost:8080/api/v1/country/${URLCountry}`;
+        countryPageURL = `../countries/${URLCountry}`;
     }
+
     return (
         <div className="countryContainer">
-            <a className="countryRow" href={countryPageURL}>
+            <a href={countryPageURL} className="countryRow">
                 <div className="country">
                     <img src={flagURL} alt="" />
                     <h1 className="countryName">{country}</h1>
