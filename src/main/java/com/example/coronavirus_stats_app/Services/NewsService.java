@@ -62,4 +62,8 @@ public class NewsService {
         System.out.println(newsJSONObject);
         http.disconnect();
     }
+
+    public JSONObject getNewsJSONObject() {
+        return newsJSONObject;
+    }
 }
