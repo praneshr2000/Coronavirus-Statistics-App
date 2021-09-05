@@ -1,19 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding-right: 0;
   font-family: "Montserrat", sans-serif;
   background-color: #1a1a1c;
-  color: #fff;
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 64px;
   color: #fff;
 }
 
@@ -100,4 +89,19 @@
 
 .newDeathsTable {
   width: 200px;
+}
+
+.appHeader {
+  text-align: center;
+  padding-bottom: 10%;
+  line-height: 30px;
+}
+
+.button {
+  background-color: #03dac5;
+  text-decoration: none;
+}
+
+.colClass {
+  padding: 1.75%;
 }
