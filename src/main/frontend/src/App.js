@@ -7,7 +7,7 @@ function App() {
   return(
     <Container className="homeContainer" className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
       <Row className="appHeader">
-        <h1>Welcome to the Coronavirus Statistics and Daily Updates App!</h1>
+        <h1>Welcome to the Coronavirus Statistcs and Daily Updates App!</h1>
       </Row>
       <Row >
         <Col className="d-grid gap-2" className='colClass'>
