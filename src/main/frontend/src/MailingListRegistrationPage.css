@@ -1,0 +1,40 @@
+.container {
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.container h1 {
+  padding: 5%;
+}
+
+.row1 {
+  padding: 2.5%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.row2 {
+  padding: 2.5%;
+}
+
+.btn Button {
+  background-color: #03dac5;
+}
+
+.control1 {
+  padding: 3%;
+}
+
+.control2 {
+  padding: 3%;
+}
+
+.control3 {
+  padding: 1.5%;
+}

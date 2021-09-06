@@ -36,34 +36,34 @@ const MailingListRegistrationPage = () => {
     }
 
     return (
-        <Container>
+        <Container className="container">
             <h1>
                 Registration Form
             </h1>
             <Form>
-                <Row>
-                    <Col>
-                        <Form.Control 
+                <Row className="row1">
+                    <Col className="row1col1">
+                        <Form.Control className="control1"
                             placeholder="First name"
                             value={firstName}
                             onChange={e => setFirstName(e.target.value)} />
                     </Col>
-                    <Col>
-                        <Form.Control 
+                    <Col className="row1col1">
+                        <Form.Control className="control2"
                             placeholder="Last name"
                             value={lastName}
                             onChange={e => setLastName(e.target.value)} />
                     </Col>
                 </Row>
-                <Row>
+                <Row className="row2">
                     <Col>
-                        <Form.Control 
+                        <Form.Control className="control3"
                             placeholder="Email Address"
                             value={email}
                             onChange={e => setEmail(e.target.value)} />
                     </Col>
                 </Row>
-                <Row>
+                <Row className="btn">
                     <Button size='lg' onClick={handleClick}>
                             Submit
                     </Button>
