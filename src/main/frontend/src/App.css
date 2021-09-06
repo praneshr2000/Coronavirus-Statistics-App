@@ -94,7 +94,6 @@
 .appHeader {
   text-align: center;
   padding-bottom: 10%;
-  line-height: 30px;
 }
 
 .button {
@@ -103,5 +102,11 @@
 }
 
 .colClass {
-  padding: 1.75%;
+  padding: 2%;
+}
+
+.appHeader h1 {
+  line-height: 130%;
+  font-weight: bold;
+  font-size: 250%;
 }
