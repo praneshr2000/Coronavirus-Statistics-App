@@ -16,7 +16,7 @@ function App() {
           </Button>
         </Col>
         <Col className="d-grid gap-2" className='colClass'>
-          <Button href='/mailing_list' size="lg" className='button'>
+          <Button href='/mailing_list/register' size="lg" className='button'>
             Register for Daily Updates
           </Button>
         </Col>
