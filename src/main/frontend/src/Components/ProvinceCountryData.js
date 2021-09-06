@@ -69,7 +69,7 @@ const ProvinceCountryData = () => {
     return (
         <div>
             
-            <h1>India</h1>
+            <h1>{country}</h1>
             <img src={countryData[0].flagURL} alt="" />
 
             {// Split the 4 headers into 2 rows and 2 columns using react-bootstrap
@@ -115,33 +115,6 @@ const ProvinceCountryData = () => {
             </Table>
 
         </div>
-        
-
-        // <div>
-        //     {countryData.map((curr) => {
-        //         return (
-        //             <ProvinceDetails
-        //             key={curr.provinceState}
-        //             provinceState={curr.provinceState}
-        //             hasProvinceState={curr.hasProvinceState}
-        //             lastUpdate={curr.lastUpdate}
-        //             latitude={curr.latitude}
-        //             longitude={curr.longitude}
-        //             confirmed={curr.confirmed}
-        //             deaths={curr.deaths}
-        //             recovered={curr.recovered}
-        //             active={curr.active}
-        //             combinedKey={curr.combinedKey}
-        //             incidentRate={curr.incidentRate}
-        //             caseFatalityRatio={curr.caseFatalityRatio}
-        //             newCases={curr.newCases}
-        //             newDeaths={curr.newDeaths}
-        //             newRecovered={curr.newRecovered}
-        //             newActive={curr.newActive}                    
-        //             />
-        //         )
-        //     })}
-        // </div>
     )
 }
 
