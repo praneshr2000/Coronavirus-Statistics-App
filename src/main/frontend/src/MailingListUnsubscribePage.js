@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import axios from 'axios'
 import { useState } from 'react';
+import './MailingListUnsubscribePage.css';
 
 const MailingListUnsubscribePage = () => {
     const [email, setEmail] = useState("");
@@ -26,19 +27,19 @@ const MailingListUnsubscribePage = () => {
     }
 
     return (
-        <Container>
+        <Container className="container">
             <h1>
                 Unsubcribe from the mailing list
             </h1>
 
             <Form>
-                <Row>
-                    <Form.Control 
+                <Row className="row">
+                    <Form.Control className="control" 
                         placeholder="Email Address"
                         value={email}
                         onChange={e => setEmail(e.target.value)} />
                 </Row>
-                <Row>
+                <Row className="btn">
                     <Button size='lg' onClick={handleClick}>
                             Submit
                     </Button>

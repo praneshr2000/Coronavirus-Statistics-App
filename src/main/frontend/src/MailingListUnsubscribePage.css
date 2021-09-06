@@ -1,0 +1,27 @@
+.container {
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.container h1 {
+  font-weight: bold;
+}
+
+.btn Button {
+  background-color: #03dac5;
+}
+
+.row {
+  padding-top: 6%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.control {
+  padding: 2%;
+}
