@@ -2,8 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import ProvinceDetails from './ProvinceDetails'
-import {Table, Container} from 'react-bootstrap';
+import {Table, Row, Col} from 'react-bootstrap';
+import './ProvinceCountryData.css'
 
 const ProvinceCountryData = () => {
     const [countryData, setCountryData] = useState([{
@@ -67,19 +67,36 @@ const ProvinceCountryData = () => {
 
 
     return (
-        <div>
+        <div className="mainDiv">
             
-            <h1>{country}</h1>
-            <img src={countryData[0].flagURL} alt="" />
+            <h1 className="countryName" >{country}</h1>
 
-            {// Split the 4 headers into 2 rows and 2 columns using react-bootstrap
-            }
-            <h3>Confirmed Cases: {countryConfirmedCases.toLocaleString()}</h3>
-            <h3>Confirmed Deaths: {countryConfirmedDeaths.toLocaleString()}</h3>
-            <h3>New Confirmed Cases: {countryNewConfirmedCases.toLocaleString()}</h3>
-            <h3> New Confirmed Deaths: {countryNewConfirmedDeaths.toLocaleString()}</h3>
+            <Row className="imageRow">
+                <img  src={countryData[0].flagURL} alt="" />
+            </Row>
 
-            <Table striped bordered hover variant="dark" responsive>
+            
+            <Row className="confirmed">
+                <Col>
+                    <h3>Confirmed Cases: {countryConfirmedCases.toLocaleString()}</h3>                
+                </Col>
+
+                <Col>
+                    <h3>Confirmed Deaths: {countryConfirmedDeaths.toLocaleString()}</h3>
+                </Col>
+            </Row>
+
+            <Row className="new">
+                <Col>
+                    <h3>New Confirmed Cases: {countryNewConfirmedCases.toLocaleString()}</h3>
+                </Col>
+
+                <Col>
+                    <h3> New Confirmed Deaths: {countryNewConfirmedDeaths.toLocaleString()}</h3>
+                </Col>
+            </Row>
+
+            <Table className="table" striped bordered hover variant="dark" responsive>
                 <thead>
                     <tr>
                     <th>Province/State</th>

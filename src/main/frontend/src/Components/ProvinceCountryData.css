@@ -1,0 +1,30 @@
+.countryName {
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 400%;
+  padding: 1.3%;
+}
+
+.imageRow {
+  justify-content: center;
+  display: flex;
+  align-content: center;
+}
+
+.imageRow img {
+  height: 120px;
+  width: 240px;
+}
+
+.confirmed {
+  padding-top: 5%;
+}
+
+.new {
+  padding-bottom: 5%;
+}
+
+.table th {
+  font-size: large;
+}
