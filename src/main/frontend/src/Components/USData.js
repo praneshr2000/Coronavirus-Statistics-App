@@ -4,7 +4,30 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const USData = () => {
-    const [countryData, setCountryData] = useState({});
+    const [countryData, setCountryData] = useState({"": [{
+                                            provinceState: "",
+                                            countryName: "",
+                                            hasProvinceState: false,
+                                            lastUpdate: "",
+                                            latitude: 0.0,
+                                            longitude: 0.0,
+                                            confirmed: 0,
+                                            deaths: 0,
+                                            recovered: 0,
+                                            active: 0,
+                                            combinedKey: "",
+                                            incidentRate: 0.0,
+                                            caseFatalityRatio: 0.0,
+                                            newCases: 0,
+                                            newDeaths: 0,
+                                            newRecovered: 0,
+                                            newActive: 0,
+                                            iso2: "",
+                                            flagURL: "",
+                                            usa: false,
+                                            uscountyName: "",
+                                            fipscode: -1
+    }]});
 
     useEffect(() => {
         axios

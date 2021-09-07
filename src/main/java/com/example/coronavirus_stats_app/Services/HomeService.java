@@ -80,7 +80,17 @@ public class HomeService {
         }
 
         // For US counties
+        int USATotalCases = 0;
+        int USATotalDeaths = 0;
+        int USANewCases = 0;
+        int USANewDeaths = 0;
         for (String state: coronaVirusDataService.getUSStateToCountyMap().keySet()) {
+
+            // Special exception. "Recovered" added as a US state in the data
+            if (state.equals("Recovered")) {
+                continue;
+            }
+
             int stateConfirmedCases = 0;
             int stateDeaths = 0;
             int stateNewCases = 0;
@@ -93,23 +103,28 @@ public class HomeService {
                 stateNewDeaths += placeData.getNewDeaths();
             }
 
-            HomepageData.CountryData countryData = new HomepageData.CountryData(
-                    "US",
-                    coronaVirusDataService.getCountryToISO2Code().get("US").get(0),
-                    coronaVirusDataService.getCountryToISO2Code().get("US").get(1),
-                    stateConfirmedCases,
-                    stateDeaths,
-                    stateNewCases,
-                    stateNewDeaths,
-                    true
-            );
-            countryDataSet.add(countryData);
-
             globalConfirmedCases += stateConfirmedCases;
             globalDeaths += stateDeaths;
             globalNewCases += stateNewCases;
             globalNewDeaths += stateNewDeaths;
+
+            USATotalCases += stateConfirmedCases;
+            USATotalDeaths += stateDeaths;
+            USANewCases += stateNewCases;
+            USANewDeaths += stateNewDeaths;
         }
+
+        HomepageData.CountryData countryData = new HomepageData.CountryData(
+                "US",
+                coronaVirusDataService.getCountryToISO2Code().get("US").get(0),
+                coronaVirusDataService.getCountryToISO2Code().get("US").get(1),
+                USATotalCases,
+                USATotalDeaths,
+                USANewCases,
+                USANewDeaths,
+                true
+        );
+        countryDataSet.add(countryData);
 
         // Return the HomepageData object
         return new HomepageData(globalConfirmedCases,
