@@ -1,0 +1,169 @@
+.globalDataContainer h1 {
+  text-align: center;
+  font-weight: bold;
+  padding-top: 6%;
+  padding-bottom: 4%;
+  font-size: 300%;
+  text-decoration: underline;
+}
+
+.topRowStats {
+  font-size: x-large;
+}
+
+.bottomRowStats {
+  font-size: x-large;
+}
+
+.countrySearch {
+  padding-bottom: 6%;
+  padding-top: 5%;
+}
+
+.countrySearchText {
+  margin-bottom: 32px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.countrySearchText {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.countrySearchInput {
+  border-radius: 4px;
+  border: none;
+  background-image: #03dac5;
+  color: rgb(9, 10, 10);
+  background-color: #03dac5;
+  padding: 1%;
+}
+
+.countrySearchInput::placeholder {
+  color: rgb(9, 10, 10);
+  text-align: center;
+}
+
+.searchForm {
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.rowFlag {
+  height: 40px;
+  width: 70px;
+}
+
+.flagCol {
+  width: 70px;
+}
+
+td > a {
+  display: block;
+  line-height: 40px;
+}
+
+td > * {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.tableRow a {
+  color: #fff;
+  font-size: large;
+}
+
+.tableHeader {
+  text-align: center;
+  font-size: x-large;
+}
+
+/* .globalDataPage {
+  float: center;
+  text-align: center;
+}
+
+.globalDataPageHeader {
+  font-size: 65px;
+  padding-bottom: 35px;
+}
+
+.totalStats h2 {
+  float: center;
+  text-align: center;
+  display: inline-flex;
+  padding: 25px;
+}
+
+.newStats h2 {
+  float: center;
+  text-align: center;
+  display: inline-flex;
+  padding: 25px;
+  padding-bottom: 80px;
+}
+
+.countrySearch {
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.countrySearchText {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.countrySearchInput {
+  padding-left: 16px;
+  width: 300px;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  background-image: linear-gradient(-225deg, #ac32e4, #7918f2, #4801ff);
+  color: #e2e2e2;
+}
+
+.countrySearchInput::placeholder {
+  color: #e2e2e2;
+}
+
+.tableHeaderRow {
+  display: flex;
+  justify-content: center;
+}
+
+.tableHeaderRow p {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  border-bottom: 10px solid #d7d7d7;
+  padding-bottom: 20px;
+}
+
+.countryNameTable {
+  width: 280px;
+}
+
+.totalCasesTable {
+  width: 210px;
+}
+
+.totalDeathsTable {
+  width: 250px;
+}
+
+.newCasesTable {
+  width: 200px;
+}
+
+.newDeathsTable {
+  width: 200px;
+} */
