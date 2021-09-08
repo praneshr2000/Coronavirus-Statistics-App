@@ -30,7 +30,7 @@ public class MailingListController {
     public String deleteUser(@PathVariable String email) {
         try {
             mailingListService.deleteExistingUser(email);
-            return "The email has been removed from the mailing list.";
+            return "The email has been removed from the mailing list. You will now stop receiving daily updates";
         } catch (Exception e) {
             return e.getMessage();
         }

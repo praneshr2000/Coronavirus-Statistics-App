@@ -9,15 +9,24 @@ function App() {
       <Row className="appHeader">
         <h1>Welcome to the Coronavirus Statistics and Daily Updates App!</h1>
       </Row>
-      <Row >
+
+      <Row>
         <Col className="d-grid gap-2" className='colClass'>
           <Button href="/countries/all" size="lg" className='button'>
             Global Coronavirus Statistics
           </Button>
         </Col>
+      </Row>
+
+      <Row >
         <Col className="d-grid gap-2" className='colClass'>
           <Button href='/mailing_list/register' size="lg" className='button'>
-            Register for Daily Updates
+            Register for Daily Coronavirus Updates
+          </Button>
+        </Col>
+        <Col>
+          <Button href="/mailing_list/unsubscribe" size="lg" className='button'>
+            Unsubscribe from the Daily Updates
           </Button>
         </Col>
       </Row>

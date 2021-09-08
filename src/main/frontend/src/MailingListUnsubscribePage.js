@@ -1,38 +1,75 @@
 import React from 'react'
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, Alert, Fade } from 'react-bootstrap';
 import axios from 'axios'
 import { useState } from 'react';
 import './MailingListUnsubscribePage.css';
 
 const MailingListUnsubscribePage = () => {
     const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [unsubscribeSuccess, setUnsubscribeSuccess] = useState(false);
+    const [unsubscribeFail, setUnsubscribeFail] = useState(false);
+    const [allInputAlert, setAllInputAlert] = useState(false);
+
 
     const handleClick = () => {
-        if (email.length === 0) {
-            alert("Please enter an email address");
+        if (email.length === 0 || !(email.trim().match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/))) {
+            setAllInputAlert(true)
+            setTimeout(function(){
+                setAllInputAlert(false);
+            }.bind(this),5000);
         } else {
-            var message = "";
+            var m = "";
             setEmail(email.trim());
 
             axios
             .delete(`http://localhost:8080/api/v1/mailingList/delete/${email}`)
             .then(result => {
-                message = result.data;
-                console.log(message)
+                m = result.data;
+                if (m === "This email is not there in the mailing list.") {
+                    setMessage(m)
+                    setUnsubscribeFail(true)
+                    setTimeout(function(){
+                        setUnsubscribeFail(false);
+                    }.bind(this),5000);
+                } else {
+                    setMessage(m)
+                    setUnsubscribeSuccess(true)
+                    setTimeout(function(){
+                        setUnsubscribeSuccess(false);
+                    }.bind(this),8000);
+                    
+                }
             })
             .catch(error => console.log(error));
-            
-            return message;
         }
     }
 
     return (
         <Container className="container">
+            <Fade in={allInputAlert}>
+                <Alert variant="danger" show={allInputAlert}>
+                    Please enter a valid email address
+                </Alert>
+            </Fade>
+
+            <Fade in={unsubscribeSuccess}>
+                <Alert variant="success" show={unsubscribeSuccess}>
+                    {message}
+                </Alert>
+            </Fade>
+
+            <Fade in={unsubscribeFail}>
+                <Alert variant="danger" show={unsubscribeFail}>
+                    {message}
+                </Alert>
+            </Fade>
+            
             <h1>
                 Unsubcribe from the mailing list
             </h1>
 
-            <Form>
+            <div>
                 <Row className="row">
                     <Form.Control className="control" 
                         placeholder="Email Address"
@@ -44,7 +81,7 @@ const MailingListUnsubscribePage = () => {
                             Submit
                     </Button>
                 </Row>
-            </Form>
+            </div>
         </Container>
     )
 }

@@ -80,9 +80,9 @@ const AllCountriesPage = () => {
           Search for a country
         </h3>
 
-        <form className="searchForm">
-          <input type="text" placeholder='Search' className='countrySearchInput' onChange={handleChange} />
-        </form>
+        <div className="searchForm">
+          <input type="text" placeholder='Search here...' className='countrySearchInput' onChange={handleChange} />
+        </div>
       </div>
 
       <Table className="allCountriesTable" striped bordered hover variant="dark" responsive>
@@ -121,10 +121,10 @@ const AllCountriesPage = () => {
                   {c.country}
                 </a>
               </td>
-              <td><a href={countryPageURL}>{c.totalCountryConfirmedCases}</a></td>
-              <td><a href={countryPageURL}>{c.totalCountryConfirmedDeaths}</a></td>
-              <td><a href={countryPageURL}>{c.totalCountryNewConfirmedCases}</a></td>
-              <td><a href={countryPageURL}>{c.totalCountryNewConfirmedDeaths}</a></td>
+              <td><a href={countryPageURL}>{c.totalCountryConfirmedCases.toLocaleString()}</a></td>
+              <td><a href={countryPageURL}>{c.totalCountryConfirmedDeaths.toLocaleString()}</a></td>
+              <td><a href={countryPageURL}>{c.totalCountryNewConfirmedCases.toLocaleString()}</a></td>
+              <td><a href={countryPageURL}>{c.totalCountryNewConfirmedDeaths.toLocaleString()}</a></td>
             </tr>
           ) 
         })}
@@ -132,109 +132,6 @@ const AllCountriesPage = () => {
       </Table>
 
     </div>
-
-
-
-
-
-
-    // <div className="AllCountriesDataPage">
-
-    //   <div className='globalDataPage'>
-    //     <h1 className='globalDataPageHeader'>
-    //       COVID-19 GLOBAL DATA
-    //     </h1>
-
-    //     <div className="totalStats">
-    //       <h2 className="totalCases">
-    //         Total Cases: {globalData.globalConfirmedCases.toLocaleString('en-US')}
-    //       </h2>
-
-    //       <h2 className="totalDeaths">
-    //         Total Deaths: {globalData.globalDeaths.toLocaleString('en-US')}
-    //       </h2>
-    //     </div>
-
-    //     <div className="newStats">
-    //       <h2 className="newCases">
-    //         New Cases: {globalData.globalNewCases.toLocaleString('en-US')}
-    //       </h2>
-
-    //       <h2 className="newDeaths">
-    //         New Deaths: {globalData.globalNewDeaths.toLocaleString('en-US')}
-    //       </h2>
-    //     </div>
-
-    //     <div className="countrySearch">
-    //       <h3 className='countrySearchText'>
-    //         Search for a country
-    //       </h3>
-
-    //       <form>
-    //         <input type="text" placeholder='Search' className='countrySearchInput' onChange={handleChange} />
-    //       </form>
-    //     </div>
-        
-    //     <div className="tableHeaderRow">
-    //       <p className="countryNameTable">
-    //         Country
-    //       </p>
-
-    //       <p className="totalCasesTable">
-    //         Total Cases
-    //       </p>
-
-    //       <p className="totalDeathsTable">
-    //         Total Deaths
-    //       </p>
-
-    //       <p className="newCasesTable">
-    //         New Cases
-    //       </p>
-    //     </div>
-
-
-    //   </div>
-    // <Table className="allCountriesTable" striped bordered hover variant="dark" responsive>
-    //                 <thead>
-    //                     <tr>
-    //                       <th>Country</th>
-    //                       <th>Confirmed Cases</th>
-    //                       <th>Confirmed Deaths</th>
-    //                       <th>New Cases</th>
-    //                       <th>New Deaths</th>
-    //                     </tr>
-    //                 </thead>
-                    
-    //                 <tbody>
-    //                   {                        
-    //                     filteredSearchArray.map((c) => {
-
-    //                         var countryPageURL = "";
-    //                         const URLCountry = c.country.replace(/ /g, "%20")
-    //                         if (c.hasProvinceStateData) {
-    //                             if (c.country === "US") {
-    //                             countryPageURL = "../countries/US";
-    //                         } else {
-    //                             countryPageURL = `../countries/province_state/${URLCountry}`;
-    //                         }
-    //                       } else {
-    //                           countryPageURL = `../countries/${URLCountry}`;
-    //                       }
-
-    //                     return (
-    //                         <tr key={c.country}>
-    //                             <td><a href={countryPageURL}>{c.country} <img src={c.flagURL} alt="" /></a></td>
-    //                             <td><a href={countryPageURL}>{c.totalCountryConfirmedCases}</a></td>
-    //                             <td><a href={countryPageURL}>{c.totalCountryConfirmedDeaths}</a></td>
-    //                             <td><a href={countryPageURL}>{c.totalCountryNewConfirmedCases}</a></td>
-    //                             <td><a href={countryPageURL}>{c.totalCountryNewConfirmedDeaths}</a></td>
-    //                         </tr>
-    //                     )
-    //                 })}
-    //             </tbody>
-    //         </Table>
-    // </div>
   );
 }
 
