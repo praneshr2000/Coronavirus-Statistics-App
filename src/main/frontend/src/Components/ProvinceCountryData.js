@@ -88,11 +88,11 @@ const ProvinceCountryData = () => {
 
             <Row className="new">
                 <Col>
-                    <h3>New Confirmed Cases: {countryNewConfirmedCases.toLocaleString()}</h3>
+                    <h3>New Cases: {countryNewConfirmedCases.toLocaleString()}</h3>
                 </Col>
 
                 <Col>
-                    <h3> New Confirmed Deaths: {countryNewConfirmedDeaths.toLocaleString()}</h3>
+                    <h3> New Deaths: {countryNewConfirmedDeaths.toLocaleString()}</h3>
                 </Col>
             </Row>
 

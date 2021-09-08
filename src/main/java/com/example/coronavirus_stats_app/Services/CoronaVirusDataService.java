@@ -27,7 +27,7 @@ public class CoronaVirusDataService {
     private final List<PlaceData> allData = new ArrayList<>();
     private final Map<String, List<PlaceData>> countriesWithProvinceMap = new HashMap<>();
     private final Map<String, PlaceData> countriesWithoutProvinceMap = new HashMap<>();
-    private final Map<String, List<PlaceData>> USStateToCountyMap = new HashMap<>();
+    private final Map<String, List<PlaceData>> USStateToCountyMap = new TreeMap<>();
     private final Map<String, List<String>> countryToISO2Code = new HashMap<>();
 
     @PostConstruct
