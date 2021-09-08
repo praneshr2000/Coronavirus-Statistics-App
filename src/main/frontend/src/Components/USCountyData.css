@@ -1,0 +1,12 @@
+.countyName {
+  text-align: center;
+  padding-top: 3%;
+  padding-bottom: 1.5%;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 270%;
+}
+
+.bottomRow {
+  padding-bottom: 3%;
+}

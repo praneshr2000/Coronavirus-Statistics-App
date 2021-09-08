@@ -64,8 +64,6 @@ const ProvinceCountryData = () => {
         
      }, []);
 
-
-
     return (
         <div className="mainDiv">
             
@@ -74,7 +72,6 @@ const ProvinceCountryData = () => {
             <Row className="imageRow">
                 <img  src={countryData[0].flagURL} alt="" />
             </Row>
-
             
             <Row className="confirmed">
                 <Col>
@@ -126,11 +123,8 @@ const ProvinceCountryData = () => {
                             </tr>
                         )
                     })}
-                </tbody>
-
-                
+                </tbody>                
             </Table>
-
         </div>
     )
 }

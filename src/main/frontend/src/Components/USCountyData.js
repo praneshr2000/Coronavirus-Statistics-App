@@ -1,7 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router'
-import {Table} from 'react-bootstrap'
+import {Table, Col, Row} from 'react-bootstrap'
 import { useEffect, useState } from 'react'
+import './USCountyData.css'
 
 const USCountyData = (props) => {
     const countiesList = props.counties;
@@ -32,12 +33,25 @@ const USCountyData = (props) => {
     }, [])
 
     return (
-        <div>
-            <h1>{stateParams}</h1>
-            <h3>Confirmed Cases: {confirmedCases.toLocaleString()}</h3>
-            <h3>Confirmed Deaths: {confirmedDeaths.toLocaleString()}</h3>
-            <h3>New Cases: {newCases.toLocaleString()}</h3>
-            <h3>New Deaths: {newDeaths.toLocaleString()}</h3>
+        <div className="mainContainer">
+            <h1 className="countyName">{stateParams}</h1>
+            <Row>
+                <Col>
+                    <h3>Confirmed Cases: {confirmedCases.toLocaleString()}</h3>
+                </Col>
+                <Col>
+                    <h3>Confirmed Deaths: {confirmedDeaths.toLocaleString()}</h3>
+                </Col>
+            </Row>
+
+            <Row className="bottomRow">
+                <Col>
+                    <h3>New Cases: {newCases.toLocaleString()}</h3>                
+                </Col>
+                <Col>
+                    <h3>New Deaths: {newDeaths.toLocaleString()}</h3>
+                </Col>
+            </Row>
 
             <Table className="table" striped bordered hover variant="dark" responsive>
                 <thead>
