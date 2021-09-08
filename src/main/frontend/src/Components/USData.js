@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import {Col, Container, Row, Table} from 'react-bootstrap'
-import USCountyData from './USCountyData'
+import './USData.css'
 
 const USData = () => {
     const [countryData, setCountryData] = useState({"": [{
@@ -69,18 +69,35 @@ const USData = () => {
      }, []);
 
     return (
-        <div>
-            <h1>US</h1>
-            <img src={flagURL} alt="" />
-            <h3>Confirmed Cases: {confirmedCases.toLocaleString()}</h3>
-            <h3>Confirmed Deaths: {confirmedDeaths.toLocaleString()}</h3>
-            <h3>New Cases: {newCases.toLocaleString()}</h3>
-            <h3>New Deaths: {newDeaths.toLocaleString()}</h3>
-             <div >
-                <Table className="table" striped bordered hover variant="dark" responsive>
+        <div className="mainContainer">
+            <h1 className="countryName">US</h1>
+            <Row className="imageRow">
+                <img className="image" src={flagURL} alt="" />
+            </Row>
+            
+            <Row className="topRow">
+                <Col>
+                    <h3>Confirmed Cases: {confirmedCases.toLocaleString()}</h3>
+                </Col>
+                <Col>
+                    <h3>Confirmed Deaths: {confirmedDeaths.toLocaleString()}</h3>
+                </Col>
+            </Row>
+            
+            <Row className="bRow">
+                <Col>
+                    <h3>New Cases: {newCases.toLocaleString()}</h3>
+                </Col>
+                <Col>
+                    <h3>New Deaths: {newDeaths.toLocaleString()}</h3>
+                </Col>
+            </Row>
+            
+             <div className="tableClass" >
+                <Table className="tableState" striped bordered hover variant="dark" responsive>
                     <thead>
                         <tr>
-                        <th>State</th>
+                        <th className="tableHeader">State</th>
                         </tr>
                     </thead>
 
@@ -97,7 +114,7 @@ const USData = () => {
                                 return (
                                     <tr key={state}>
                                         <td>
-                                            <a href={countyListURL}>
+                                            <a className="aClass" href={countyListURL}>
                                                 {state}
                                             </a>
                                         </td>

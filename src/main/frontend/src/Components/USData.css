@@ -1,0 +1,29 @@
+.imageRow {
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.tableClass {
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+}
+
+.aClass {
+  color: #fff;
+  font-size: x-large;
+}
+
+.tableState th {
+  font-size: xx-large;
+}
+
+.topRow {
+  padding-top: 3%;
+}
+
+.bRow {
+  padding-bottom: 4%;
+}
