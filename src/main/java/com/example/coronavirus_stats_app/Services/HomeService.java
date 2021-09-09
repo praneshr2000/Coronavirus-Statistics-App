@@ -84,8 +84,8 @@ public class HomeService {
         int USATotalDeaths = 0;
         int USANewCases = 0;
         int USANewDeaths = 0;
+        // Iterate through each state
         for (String state: coronaVirusDataService.getUSStateToCountyMap().keySet()) {
-
             // Special exception. "Recovered" added as a US state in the data
             if (state.equals("Recovered")) {
                 continue;
@@ -96,6 +96,7 @@ public class HomeService {
             int stateNewCases = 0;
             int stateNewDeaths = 0;
 
+            // Iterate through each state's county data
             for (PlaceData placeData: coronaVirusDataService.getUSStateToCountyMap().get(state)) {
                 stateConfirmedCases += placeData.getConfirmed();
                 stateDeaths += placeData.getDeaths();
@@ -103,6 +104,7 @@ public class HomeService {
                 stateNewDeaths += placeData.getNewDeaths();
             }
 
+            // Add each state's data to global data and USA country data
             globalConfirmedCases += stateConfirmedCases;
             globalDeaths += stateDeaths;
             globalNewCases += stateNewCases;
@@ -114,6 +116,7 @@ public class HomeService {
             USANewDeaths += stateNewDeaths;
         }
 
+        // Add the US data
         HomepageData.CountryData countryData = new HomepageData.CountryData(
                 "US",
                 coronaVirusDataService.getCountryToISO2Code().get("US").get(0),

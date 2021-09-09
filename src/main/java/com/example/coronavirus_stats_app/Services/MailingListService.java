@@ -15,6 +15,7 @@ public class MailingListService {
         this.mailingListUserRepository = mailingListUserRepository;
     }
 
+    // Register the user with given details, raise exception if failure occurs
     public void saveUserDetails(MailingListUserDetails mailingListUserDetails) {
         if (!emailValidator(mailingListUserDetails.getEmailAddress())) {
             throw new IllegalStateException("Invalid email address.");
@@ -28,11 +29,13 @@ public class MailingListService {
         mailingListUserRepository.save(mailingListUserDetails);
     }
 
+    // Helper to validate if email is valid
     private boolean emailValidator(String email) {
         EmailValidator emailValidator = EmailValidator.getInstance();
         return emailValidator.isValid(email);
     }
 
+    // Delete the user from the database, raise exception if failure occurs
     public void deleteExistingUser(String email) {
         if (!mailingListUserRepository.existsById(email.toLowerCase())) {
             throw new IllegalStateException("This email is not there in the mailing list.");

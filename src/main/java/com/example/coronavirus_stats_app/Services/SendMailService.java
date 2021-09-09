@@ -31,17 +31,15 @@ public class SendMailService {
     @Autowired
     private NewsService newsService;
 
+    // This is the method to send the email through Amazon's AWS SES service.
     @Async
     @PostConstruct
     public void sendEmail() throws UnsupportedEncodingException, MessagingException, MessagingException, JSONException {
-        /*
-        * If you get email address not verified, you have to first deploy the app to get the website url
-        * , and then you can apply to move out of sandbox in aws ses, so you can send messages to
-        * unverified email addresses.
-        * */
 
+        // Get the news content
         Map<Integer, List<String>> newsContent = buildNewsContent(newsService.getNewsJSONObject());
 
+        // Set the email details
         String recipient = "covid.app.info@gmail.com";
         String subject = "Daily Coronavirus Update";
         String content = htmlBuilder(newsContent);
@@ -54,6 +52,14 @@ public class SendMailService {
         mailSender.send(message);
     }
 
+    /*
+    *
+    * This is the helper method to build the responsive email html as a string.
+    * The source template is from:
+    *   https://webdesign.tutsplus.com/articles/creating-a-simple-responsive-html-email--webdesign-12978
+    * and modified accordingly
+    *
+    * */
     public String htmlBuilder(Map<Integer, List<String>> newsContent) {
         StringBuilder html = new StringBuilder("<!DOCTYPE html>\n" +
                 "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n" +

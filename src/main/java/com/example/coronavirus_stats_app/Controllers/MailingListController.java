@@ -16,6 +16,7 @@ public class MailingListController {
         this.mailingListService = mailingListService;
     }
 
+    // Post mapping. Register the user with the parameters of MailingListUserDetails in RequestBody
     @PostMapping(value = "/register")
     public String mailingListRegistration(@RequestBody MailingListUserDetails mailingListUserDetails) {
         try {
@@ -26,6 +27,7 @@ public class MailingListController {
         }
     }
 
+    // Delete Mapping. Deletes the email given in path variable if available in database
     @DeleteMapping(value = "/delete/{email}")
     public String deleteUser(@PathVariable String email) {
         try {
