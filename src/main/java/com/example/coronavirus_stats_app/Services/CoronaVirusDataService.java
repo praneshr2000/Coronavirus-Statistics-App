@@ -31,7 +31,7 @@ public class CoronaVirusDataService {
     private final Map<String, List<String>> countryToISO2Code = new HashMap<>();
 
     @PostConstruct
-    @Scheduled(cron = "0 45 7 * * ?", zone = "UTC")
+    @Scheduled(cron = "0 45 7 ? * *", zone = "UTC")
     public void getDataFromURL() throws IOException, InterruptedException {
         // The above @Scheduled cron executes this method everyday at 7:45am UTC
 

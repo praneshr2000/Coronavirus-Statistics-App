@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -33,7 +34,7 @@ public class SendMailService {
 
     // This is the method to send the email through Amazon's AWS SES service.
     @Async
-    @PostConstruct
+    @Scheduled(cron = "0 30 12 ? * *", zone = "UTC")
     public void sendEmail() throws UnsupportedEncodingException, MessagingException, MessagingException, JSONException {
 
         // Get the news content

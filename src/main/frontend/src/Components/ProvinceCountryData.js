@@ -38,6 +38,8 @@ const ProvinceCountryData = () => {
 
     // Fetch data from backend
     useEffect(() => {
+
+        // Fetch data for country with province data
         axios
         .get(`http://localhost:8080/api/v1/country/province_state/${country.replace(/%20/g, " ")}`)
         .then(result => {
@@ -45,11 +47,12 @@ const ProvinceCountryData = () => {
         })
         .catch(error => console.log(error));
 
-
+        // Fetch all countries page data
         axios
         .get("http://localhost:8080/api/v1/home")
         .then(result => {
-
+            // Map through the entire list and find the desired country
+            // and then set the stats
             result.data.countryDataList.map((curr) => {
                 
                 if (curr.country === country) {

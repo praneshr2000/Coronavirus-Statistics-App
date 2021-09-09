@@ -25,7 +25,7 @@ public class NewsService {
     private JSONObject newsJSONObject = new JSONObject();
 
     @PostConstruct
-    @Scheduled(cron = "0 30 12 * * ?", zone = "UTC")
+    @Scheduled(cron = "0 28 12 ? * *", zone = "UTC")
     public void callNewsAPI() throws IOException, InterruptedException, JSONException {
 
         // Date Format for URL

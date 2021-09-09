@@ -38,6 +38,7 @@ const USData = () => {
     const [flagURL, setFlagURL] = useState("");
 
     useEffect(() => {
+        // Fetch the US data
         axios
         .get('http://localhost:8080/api/v1/country/US')
         .then(result => {
@@ -47,6 +48,10 @@ const USData = () => {
             var nc = 0;
             var nd = 0;
 
+            // Map though each state and each county
+            // and add up all the stats
+            // Together, they will make up the entire US's
+            // numbers
             Object.keys(result.data).map(function(state){
                 result.data[state].map((county) => {
                     tc += county.confirmed;
@@ -56,11 +61,13 @@ const USData = () => {
                 })
             })
             
+            // Set entire US data
             setConfirmedCases(tc);
             setConfirmedDeaths(td);
             setNewCases(nc);
             setNewDeaths(nd);
 
+            // Set the flag URL
             setFlagURL("https://flagcdn.com/h120/us.png");
 
             

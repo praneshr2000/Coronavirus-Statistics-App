@@ -55,6 +55,9 @@ const PageRouter = () => {
                 <Route path='/mailing_list/register' component={MailingListRegistrationPage}></Route>
                 <Route path='/mailing_list/unsubscribe' component={MailingListUnsubscribePage}></Route>
                 <Route path='/countries/all' component={AllCountriesPage}/>
+                {// While calling the USCountyData component, pass in the the entrie US country data
+                 // so that it can be parsed later on
+                }
                 <Route path='/countries/US/:state' component={() => <USCountyData counties={countryData}/>} />
                 <Route path='/countries/US' component={USData}></Route>
                 <Route path='/countries/province_state/:country' component={ProvinceCountryData}></Route>

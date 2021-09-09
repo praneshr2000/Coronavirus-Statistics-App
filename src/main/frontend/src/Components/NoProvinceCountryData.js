@@ -25,6 +25,7 @@ const NoProvinceCountryData = () => {
 
     // Fetch data from backend
     useEffect(() => {
+        // Get the current country's data from the backend
         axios
         .get(`http://localhost:8080/api/v1/country/${country.replace(/%20/g, " ")}`)
         .then(result => {

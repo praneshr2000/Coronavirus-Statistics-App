@@ -18,6 +18,7 @@ const USCountyData = (props) => {
         var nc = 0;
         var nd = 0;
 
+        // First check if countiesList[stateParams] is not undefined
         countiesList[stateParams] && countiesList[stateParams].map((curr) => {
             tc += curr.confirmed;
             td += curr.deaths;

@@ -9,6 +9,7 @@ const GlobalCountryData = ({country,
      totalCountryNewConfirmedDeaths,
      hasProvinceStateData}) => {
     
+    // Build the URL to redirect to
     var countryPageURL = "";
     const URLCountry = country.replace(/ /g, "%20")
     if (hasProvinceStateData) {
