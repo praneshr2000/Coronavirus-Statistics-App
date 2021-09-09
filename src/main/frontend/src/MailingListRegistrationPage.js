@@ -75,7 +75,7 @@ const MailingListRegistrationPage = () => {
             <Fade in={submitSuccess}>
                 <Alert variant="success" show={submitSuccess}>
                     Registration successful! You will receive emails daily at
-                    07:45 UTC. Please check your spam if you don't receive emails
+                    12:30 UTC. Please check your spam if you don't receive emails
                 </Alert>
             </Fade>
 
