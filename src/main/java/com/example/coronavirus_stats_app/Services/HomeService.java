@@ -61,7 +61,7 @@ public class HomeService {
                 countryNewDeaths += placeData.getNewDeaths();
             }
 
-            HomepageData.CountryData countryData = new HomepageData.CountryData(
+            HomepageData.CountryData currCountryData = new HomepageData.CountryData(
                     country,
                     coronaVirusDataService.getCountryToISO2Code().get(country).get(0),
                     coronaVirusDataService.getCountryToISO2Code().get(country).get(1),
@@ -71,7 +71,7 @@ public class HomeService {
                     countryNewDeaths,
                     true
             );
-            countryDataSet.add(countryData);
+            countryDataSet.add(currCountryData);
 
             globalConfirmedCases += countryConfirmedCases;
             globalDeaths += countryDeaths;
@@ -115,9 +115,8 @@ public class HomeService {
             USANewCases += stateNewCases;
             USANewDeaths += stateNewDeaths;
         }
-
         // Add the US data
-        HomepageData.CountryData countryData = new HomepageData.CountryData(
+        HomepageData.CountryData USData = new HomepageData.CountryData(
                 "US",
                 coronaVirusDataService.getCountryToISO2Code().get("US").get(0),
                 coronaVirusDataService.getCountryToISO2Code().get("US").get(1),
@@ -127,7 +126,7 @@ public class HomeService {
                 USANewDeaths,
                 true
         );
-        countryDataSet.add(countryData);
+        countryDataSet.add(USData);
 
         // Return the HomepageData object
         return new HomepageData(globalConfirmedCases,

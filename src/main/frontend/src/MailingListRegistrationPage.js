@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Form, Button, Alert, Fade, Collapse} from 'react-bootstrap';
+import {Container, Row, Col, Form, Button, Alert, Fade} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './MailingListRegistrationPage.css';
 import { useState } from 'react';
@@ -38,7 +38,7 @@ const MailingListRegistrationPage = () => {
             
             const userDetails = {emailAddress: email, firstName: firstName, lastName: lastName};
             axios
-            .post("http://localhost:8080/api/v1/mailingList/register", userDetails)
+            .post("http://covidapp-env.eba-htewes5z.us-east-2.elasticbeanstalk.com/api/v1/mailingList/register", userDetails)
             .then(result => {
                 m = result.data;
                 if (m === "Registration successful") {

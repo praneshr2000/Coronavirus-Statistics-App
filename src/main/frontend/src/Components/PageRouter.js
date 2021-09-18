@@ -10,6 +10,7 @@ import USData from './USData';
 import USCountyData from './USCountyData';
 import { useState, useEffect } from 'react';
 import axios from 'axios'
+import { Spinner } from 'react-bootstrap';
 
 const PageRouter = () => {
 
@@ -38,18 +39,39 @@ const PageRouter = () => {
                                             fipscode: -1
     }]});
 
+    const [completedLoading, setCompletedLoading] = useState(false);
+
     useEffect(() => {
         axios
-        .get('http://localhost:8080/api/v1/country/US')
+        .get('http://covidapp-env.eba-htewes5z.us-east-2.elasticbeanstalk.com/api/v1/country/US')
         .then(result => {
             setCountryData(result.data);
+            setCompletedLoading(true);
         })
         .catch(error => console.log(error));
 
      }, []);
 
     return (
-        <Router>
+        <Router className="routerClass">
+            {!completedLoading?
+                /*
+                Code for centering the loading component. Taken from
+                https://stackoverflow.com/questions/396145/how-can-i-vertically-center-a-div-element-for-all-browsers-using-css
+                */
+                <div className="outer">
+                    <div className="middle">
+                        <div className="inner">
+                            <div className="fullScreen">
+                                <Spinner className="spinner" animation="border" size='lg' role="status">
+                                <span className="sr-only">Loading...</span>
+                                </Spinner>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            : <div className="routerClass"/>}
+
             <Switch>
                 <Route path='/' component={App} exact/>
                 <Route path='/mailing_list/register' component={MailingListRegistrationPage}></Route>

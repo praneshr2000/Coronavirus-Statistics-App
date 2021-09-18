@@ -1,6 +1,5 @@
 package com.example.coronavirus_stats_app.DataModels;
 
-import java.util.Objects;
 import java.util.Set;
 
 public class HomepageData {

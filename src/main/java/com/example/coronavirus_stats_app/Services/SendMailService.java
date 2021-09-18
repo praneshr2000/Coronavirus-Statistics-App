@@ -1,5 +1,7 @@
 package com.example.coronavirus_stats_app.Services;
 
+import com.example.coronavirus_stats_app.DataModels.MailingListUserDetails;
+import com.example.coronavirus_stats_app.Repositories.MailingListUserRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,10 +13,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 import java.util.*;
 
@@ -32,25 +32,30 @@ public class SendMailService {
     @Autowired
     private NewsService newsService;
 
-    // This is the method to send the email through Amazon's AWS SES service.
+    @Autowired
+    private MailingListUserRepository mailingListUserRepository;
+
+    // This is the method to send the email through Gmail SMTP
     @Async
     @Scheduled(cron = "0 30 12 ? * *", zone = "UTC")
-    public void sendEmail() throws UnsupportedEncodingException, MessagingException, MessagingException, JSONException {
+    public void sendEmail() throws MessagingException, JSONException {
 
         // Get the news content
         Map<Integer, List<String>> newsContent = buildNewsContent(newsService.getNewsJSONObject());
 
-        // Set the email details
-        String recipient = "covid.app.info@gmail.com";
         String subject = "Daily Coronavirus Update";
         String content = htmlBuilder(newsContent);
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom(fromEmailAddress);
-        helper.setTo(recipient);
         helper.setSubject(subject);
         helper.setText(content, true);
-        mailSender.send(message);
+
+        for (MailingListUserDetails userDetails: mailingListUserRepository.findAll()) {
+            helper.setTo(userDetails.getEmailAddress());
+            mailSender.send(message);
+        }
+
     }
 
     /*
@@ -142,7 +147,7 @@ public class SendMailService {
         html.append(NumberFormat.getInstance().format(homeService.getAllData().getGlobalDeaths()));
         html.append("</h3>\n");
         html.append("<p style=\"font-size:16px;padding-top:16px;\" align=\"center\">\n" +
-                "                                    <a href=\"https://example.com/\"\n" +
+                "                                    <a href=\"http://covid-app-bucket.s3-website.us-east-2.amazonaws.com/countries/all\"\n" +
                 "                                        style=\"background: #03DAC5; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;\">\n" +
                 "                                        <!--[if mso]><i style=\"letter-spacing: 25px;mso-font-width:-100%;mso-text-raise:20pt\">&nbsp;</i><![endif]--><span\n" +
                 "                                            style=\"mso-text-raise:10pt;font-weight:bold;\">Click for more statistics</span>\n" +
@@ -225,7 +230,7 @@ public class SendMailService {
                 "                       <tr>\n" +
                 "                            <td style=\"padding:30px;background-color:rgba(255, 255, 255, 0.137);\">\n" +
                 "                                <p style=\"font-size:16px;padding-top:16px;padding-bottom: 16px;\" align=\"center\">\n" +
-                "                                    <a href=\"https://example.com/\"\n" +
+                "                                    <a href=\"http://covid-app-bucket.s3-website.us-east-2.amazonaws.com/countries/all\"\n" +
                 "                                        style=\"background: #03DAC5; text-decoration: none; padding: 10px 25px; color: #ffffff; border-radius: 4px; display:inline-block; mso-padding-alt:0;\">\n" +
                 "                                        <!--[if mso]><i style=\"letter-spacing: 25px;mso-font-width:-100%;mso-text-raise:20pt\">&nbsp;</i><![endif]--><span\n" +
                 "                                            style=\"mso-text-raise:10pt;font-weight:bold;\">Click for more Coronavirus statistics</span>\n" +
@@ -244,7 +249,7 @@ public class SendMailService {
                 "                                            src=\"https://www.freeiconspng.com/thumbs/gmail-icon/gmail-icon-23.png\" width=\"40\" height=\"40\"\n" +
                 "                                            alt=\"t\" style=\"display:inline-block;color:#cccccc;\"></a></p>\n" +
                 "                                <p style=\"margin:0;font-size:14px;line-height:20px;\"><br><a\n" +
-                "                                        class=\"unsub\" href=\"http://www.example.com/\"\n" +
+                "                                        class=\"unsub\" href=\"http://covid-app-bucket.s3-website.us-east-2.amazonaws.com/mailing_list/unsubscribe\"\n" +
                 "                                        style=\"color:#cccccc;text-decoration:underline;\">Unsubscribe from the newsletter</a></p>\n" +
                 "                            </td>\n" +
                 "                        </tr>" +

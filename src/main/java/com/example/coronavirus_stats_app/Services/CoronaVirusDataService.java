@@ -35,6 +35,12 @@ public class CoronaVirusDataService {
     public void getDataFromURL() throws IOException, InterruptedException {
         // The above @Scheduled cron executes this method everyday at 7:45am UTC
 
+        allData.clear();
+        countriesWithoutProvinceMap.clear();
+        countriesWithProvinceMap.clear();
+        USStateToCountyMap.clear();
+        countryToISO2Code.clear();
+
         // Date Format for URL
         SimpleDateFormat dateFormat = new SimpleDateFormat( "MM-dd-yyyy" );
         // Set UTC time zone
@@ -42,14 +48,6 @@ public class CoronaVirusDataService {
         // Get the dates
         String currentDate = dateFormat.format(Date.from(Instant.now().minus(Duration.ofHours(24))));
         String oldDate = dateFormat.format(Date.from(Instant.now().minus(Duration.ofHours(48))));
-
-        // -------------------TODO: TEST PRINT ONLY, REMOVE LATER--------------------
-        SimpleDateFormat testLogTime = new SimpleDateFormat( "MM-dd-yyyy HH:mm:ss Z");
-        testLogTime.setTimeZone(TimeZone.getTimeZone("UTC"));
-        System.out.println();
-        System.out.println("The getAllData() method executed at: " + testLogTime.format(new Date()));
-        System.out.println();
-        // -------------------TODO: TEST PRINT ONLY, REMOVE LATER---------------------
 
         // URls
         String previousDayURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/" +
@@ -209,7 +207,6 @@ public class CoronaVirusDataService {
             // All rows in the data are added to this list
             allData.add(data);
         }
-
     }
 
     /*

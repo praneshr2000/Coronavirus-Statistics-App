@@ -41,9 +41,9 @@ public class NewsService {
                                 + toDate + "&from=" + fromDate + "&search_in=title");
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
         // Set the API key
-        http.setRequestProperty("x-api-key", "dBAawuV3SL3ryr_I4Jvzaxfj6Jgb8KoidmiTn0IlJNA");
+        // Next API Key registration: 29th September 2021
+        http.setRequestProperty("x-api-key", "hzU8Vym4ujWloGAjgJOaMDVGTmenJbeDYtf-VyAwNBk");
 
-        System.out.println("LOLOLOLOLOLOLOLLO");
         // Input stream and string builder
         InputStream stream = http.getInputStream();
         StringBuilder builder = new StringBuilder();
@@ -58,8 +58,6 @@ public class NewsService {
 
         // Convert String to JSON object and store it in the field
         newsJSONObject = new JSONObject(builder.toString());
-
-        System.out.println(newsJSONObject);
         http.disconnect();
     }
 

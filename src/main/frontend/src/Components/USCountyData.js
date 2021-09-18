@@ -70,9 +70,9 @@ const USCountyData = (props) => {
                 </thead>
                 <tbody>
                     
-                    {countiesList[stateParams] && countiesList[stateParams].map((curr) => {
+                    {countiesList[stateParams] && countiesList[stateParams].map((curr, index) => {
                         return (
-                            <tr key={curr.uscountyName}>
+                            <tr key={index}>
                                 <td>{curr.uscountyName}</td>
                                 <td>{curr.confirmed.toLocaleString()}</td>
                                 <td>{curr.deaths.toLocaleString()}</td>

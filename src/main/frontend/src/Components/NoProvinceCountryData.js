@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Spinner } from 'react-bootstrap'
 import './NoProvinceCountryData.css'
 
 const NoProvinceCountryData = () => {
@@ -22,20 +22,41 @@ const NoProvinceCountryData = () => {
                                             flagURL: "",
                                         });
     const {country} = useParams()
+    const [completedLoading, setCompletedLoading] = useState(false);
 
     // Fetch data from backend
     useEffect(() => {
         // Get the current country's data from the backend
+        // hosted on aws elastic beanstalk
         axios
-        .get(`http://localhost:8080/api/v1/country/${country.replace(/%20/g, " ")}`)
+        .get(`http://covidapp-env.eba-htewes5z.us-east-2.elasticbeanstalk.com/api/v1/country/${country.replace(/%20/g, " ")}`)
         .then(result => {
             setCountryData(result.data)
+            setCompletedLoading(true);
         })
         .catch(error => console.log(error));
      }, []);
 
     return (
         <Container fluild="sm" className="container">
+
+            {!completedLoading?
+                /*
+                Code for centering the loading component. Taken from
+                https://stackoverflow.com/questions/396145/how-can-i-vertically-center-a-div-element-for-all-browsers-using-css
+                */
+                <div className="outer">
+                    <div className="middle">
+                        <div className="inner">
+                            <div className="fullScreen">
+                                <Spinner className="spinner" animation="border" size='lg' role="status">
+                                <span className="sr-only">Loading...</span>
+                                </Spinner>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            : <Container className="container"/>}
             
             <h1 className="header">{countryData.countryName}</h1>
 

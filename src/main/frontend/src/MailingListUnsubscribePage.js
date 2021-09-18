@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Button, Form, Alert, Fade } from 'react-bootstrap';
+import { Container, Row, Button, Form, Alert, Fade } from 'react-bootstrap';
 import axios from 'axios'
 import { useState } from 'react';
 import './MailingListUnsubscribePage.css';
@@ -23,7 +23,7 @@ const MailingListUnsubscribePage = () => {
             setEmail(email.trim());
 
             axios
-            .delete(`http://localhost:8080/api/v1/mailingList/delete/${email}`)
+            .delete(`http://covidapp-env.eba-htewes5z.us-east-2.elasticbeanstalk.com/api/v1/mailingList/delete/${email}`)
             .then(result => {
                 m = result.data;
                 if (m === "This email is not there in the mailing list.") {

@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import {Table, Row, Col} from 'react-bootstrap';
+import {Table, Row, Col, Spinner} from 'react-bootstrap';
 import './ProvinceCountryData.css'
 
 const ProvinceCountryData = () => {
@@ -34,6 +34,7 @@ const ProvinceCountryData = () => {
     const [countryConfirmedDeaths, setCountryConfirmedDeaths] = useState(0);
     const [countryNewConfirmedCases, setCountryNewConfirmedCases] = useState(0);
     const [countryNewConfirmedDeaths, setCountryNewConfirmedDeaths] = useState(0);
+    const [completedLoading, setCompletedLoading] = useState(false);
     const {country} = useParams()
 
     // Fetch data from backend
@@ -41,7 +42,7 @@ const ProvinceCountryData = () => {
 
         // Fetch data for country with province data
         axios
-        .get(`http://localhost:8080/api/v1/country/province_state/${country.replace(/%20/g, " ")}`)
+        .get(`http://covidapp-env.eba-htewes5z.us-east-2.elasticbeanstalk.com/api/v1/country/province_state/${country.replace(/%20/g, " ")}`)
         .then(result => {
             setCountryData(result.data)
         })
@@ -49,7 +50,7 @@ const ProvinceCountryData = () => {
 
         // Fetch all countries page data
         axios
-        .get("http://localhost:8080/api/v1/home")
+        .get("http://covidapp-env.eba-htewes5z.us-east-2.elasticbeanstalk.com/api/v1/home")
         .then(result => {
             // Map through the entire list and find the desired country
             // and then set the stats
@@ -62,6 +63,8 @@ const ProvinceCountryData = () => {
                     setCountryNewConfirmedDeaths(curr.totalCountryNewConfirmedDeaths)
                 }
             })
+
+            setCompletedLoading(true);
         })
         .catch(error => console.log(error));
         
@@ -69,6 +72,24 @@ const ProvinceCountryData = () => {
 
     return (
         <div className="mainDiv">
+
+            {!completedLoading?
+                /*
+                Code for centering the loading component. Taken from
+                https://stackoverflow.com/questions/396145/how-can-i-vertically-center-a-div-element-for-all-browsers-using-css
+                */
+                <div className="outer">
+                    <div className="middle">
+                        <div className="inner">
+                            <div className="fullScreen">
+                                <Spinner className="spinner" animation="border" size='lg' role="status">
+                                <span className="sr-only">Loading...</span>
+                                </Spinner>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            : <div className="mainDiv"/>}
             
             <h1 className="countryName" >{country}</h1>
 
@@ -111,9 +132,9 @@ const ProvinceCountryData = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {countryData.map((curr) => {
+                    {countryData.map((curr, index) => {
                         return (
-                            <tr key={curr.provinceState}>
+                            <tr key={index}>
                                 <td>{curr.provinceState}</td>
                                 <td>{curr.confirmed.toLocaleString()}</td>
                                 <td>{curr.deaths.toLocaleString()}</td>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import {Col, Container, Row, Table} from 'react-bootstrap'
+import {Col, Row, Table, Spinner} from 'react-bootstrap'
 import './USData.css'
 
 const USData = () => {
@@ -35,11 +35,12 @@ const USData = () => {
     const [newCases, setNewCases] = useState(0);
     const [newDeaths, setNewDeaths] = useState(0);
     const [flagURL, setFlagURL] = useState("");
+    const [completedLoading, setCompletedLoading] = useState(false);
 
     useEffect(() => {
         // Fetch the US data
         axios
-        .get('http://localhost:8080/api/v1/country/US')
+        .get('http://covidapp-env.eba-htewes5z.us-east-2.elasticbeanstalk.com/api/v1/country/US')
         .then(result => {
             setCountryData(result.data);
             var tc = 0;
@@ -68,14 +69,35 @@ const USData = () => {
 
             // Set the flag URL
             setFlagURL("https://flagcdn.com/h120/us.png");
-
+            
+            setCompletedLoading(true);
             
         })
         .catch(error => console.log(error));
      }, []);
 
     return (
+        
         <div className="mainContainer">
+
+            {!completedLoading?
+                /*
+                Code for centering the loading component. Taken from
+                https://stackoverflow.com/questions/396145/how-can-i-vertically-center-a-div-element-for-all-browsers-using-css
+                */
+                <div className="outer">
+                    <div className="middle">
+                        <div className="inner">
+                            <div className="fullScreen">
+                                <Spinner className="spinner" animation="border" size='lg' role="status">
+                                <span className="sr-only">Loading...</span>
+                                </Spinner>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            : <div className="mainContainer"/>}
+
             <h1 className="countryName">US</h1>
             <Row className="imageRow">
                 <img className="image" src={flagURL} alt="" />
@@ -115,10 +137,10 @@ const USData = () => {
                                 }
                                 return true;
                             }
-                            ).map(function(state) {
+                            ).map(function(state, index) {
                                 var countyListURL = `/countries/US/${state}`;
                                 return (
-                                    <tr key={state}>
+                                    <tr key={index}>
                                         <td>
                                             <a className="aClass" href={countyListURL}>
                                                 {state}
