@@ -1,5 +1,5 @@
 # Covid Stats App
 
--Daily covid stats around the world
+Web Application that keeps track of Covid cases of countries and sends daily news updates to registered users.
 
--Send covid news to users on the mailbox and also stats of their preferred country
+Link: http://covid-app-bucket.s3-website.us-east-2.amazonaws.com/
